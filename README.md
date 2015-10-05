@@ -11,9 +11,9 @@ Trial Weebly Project:
 All the things:
 
 - Bootstrap 3.3.5
-- jQuery 
-- jQuery UI
-- Backbone.js
-- Handlebars.js
+- jQuery 2.1.4
+- jQuery UI 1.11.4
+- Backbone.js 1.2.3
+- Handlebars.js 3.0.3
 - Backbone-MongoDB.js
 - MongoDB
