@@ -5,7 +5,7 @@ Trial Weebly Project:
 - Tuesday: Backbone Models & Views & MongoDB
 - Wednesday: Drag&Drop and Editor
 - Thursday: perf, caching, User login
-- Friday: Cleaning code & beer
+- Friday: Cleaning code, QA & Beer
 
 
 All the things:
