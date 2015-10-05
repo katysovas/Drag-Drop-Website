@@ -14,6 +14,6 @@ All the things:
 - jQuery 2.1.4
 - jQuery UI 1.11.4
 - Backbone.js 1.2.3
-- Handlebars.js 3.0.3
+- Handlebars.js 4.0.3
 - Backbone-MongoDB.js
 - MongoDB
