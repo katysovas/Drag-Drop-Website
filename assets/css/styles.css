@@ -1,17 +1,221 @@
 .navbar-default {
   background-color: #518DCA;
   border-color: #518DCA;
-  border-radius: 0px;
-  -webkit-box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 1);
-  -moz-box-shadow:    0px 1px 1px 0px rgba(0, 0, 0, 1);
-  box-shadow:         0px 1px 1px 0px rgba(0, 0, 0, 1);
+  border-radius: 0px;  
+  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 1);
 }
 
 .navbar-default .navbar-nav > li > a {
-  color: #ffffff;
+  color: #FFF;
 }
 
 .js-account-menu{
+  font-family: "ProximaFont";
   padding-right: 50px;
   float:right;
 }
+
+#logo {
+  margin-left: 20px;
+  margin-top: 5px;
+  margin-bottom: -5px;
+  background-image: url("../images/logo.png");
+  background-repeat: no-repeat;
+  text-indent: -9999px;
+}
+
+.wrapper {
+  margin-top: 50px;
+  width: 100%;
+  max-width: none !important;
+}
+
+#sidebar {  
+  padding: 0 !important;
+  width: 250px;
+  background-color: #2C3E50;
+  position: fixed;
+  height: 100vh;
+}
+
+.block-header {
+  font-family: "ProximaFont";
+  color: #9CB3CA;	
+  padding: 10px;
+  background-color: #4F657B;
+  height: 40px;
+  border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  border-color: #1A2733;
+}
+
+.page-tab {
+  width: 180px;
+  height: 35px;
+  padding: 8px 20px 0px 20px;
+  border-radius: 5px;
+  margin: 15px auto;
+  background-color: #4F657B;
+}
+
+#page-tab-new {
+  background-color: #2C3E50;
+  border-color: #4F657B;
+  border-style: solid;
+  border-width: 2px;
+  padding: 5px 20px 0px 20px;
+}
+
+#page-tab-font-new::-webkit-input-placeholder {
+   color: #4f657B;
+}
+
+#page-tab-font-new:-moz-placeholder { /* Firefox 18- */
+   color: #4f657B;  
+}
+
+#page-tab-font-new::-moz-placeholder {  /* Firefox 19+ */
+   color: #4f657B;  
+}
+
+:#page-tab-font-new-ms-input-placeholder {  
+   color: #4f657B;  
+}
+
+#page-tab-font-new {
+  font-family: "ProximaFont";
+  color: #FFF;
+  width: 115px;
+  outline: 0px solid transparent;
+  background: none;
+  border: none;
+}
+
+.plus-sign { 
+ left: 15px;
+ color: #4F657B;
+}
+
+.element-box {
+  border-style: solid;
+  border-width: 1px;
+  border-color: #21313F;
+  padding-top: 20px;
+  background-color: #34485C;
+}
+
+.element-box:hover {
+  cursor: move;
+  background-color: #3c5065;
+}
+
+#editor-canvas {
+  height: 100%;
+  position: absolute;
+  left: 250px;
+  max-width: 80%;
+}
+
+#site-grid {
+  font-family: "ProximaFont";
+  border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  border-color: #1A2733;
+  padding: 15px 40px 5px 40px;
+  width: auto;
+  height: 50px;
+  margin-bottom: 100px;
+}
+
+.element-icon {
+  width: 50px;
+  height: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 10px;
+}
+
+.element-font {
+  color: #5B7389;
+}
+
+#switch {
+  left: 125px;
+  top: -32px;
+}
+
+/* generated */
+.onoffswitch {
+    position: relative; width: 55px;
+    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+}
+.onoffswitch-checkbox {
+    display: none;
+}
+.onoffswitch-label {
+    display: block; overflow: hidden; cursor: pointer;
+    border: 2px solid #1C2A35; border-radius: 19px;
+}
+.onoffswitch-inner {
+    display: block; width: 200%; margin-left: -100%;
+    transition: margin 0.3s ease-in 0s;
+}
+.onoffswitch-inner:before, .onoffswitch-inner:after {
+    display: block; float: left; width: 50%; height: 20px; padding: 0; line-height: 20px;
+    font-size: 10px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
+    box-sizing: border-box;
+}
+.onoffswitch-inner:before {
+    content: "";
+    padding-left: 5px;
+    background-color: #A3BE5F; color: #31332D;
+}
+.onoffswitch-inner:after {
+    content: "";
+    padding-right: 5px;
+    background-color: #50657A; color: #A1B6CB;
+    text-align: right;
+}
+.onoffswitch-switch {
+    display: block; width: 26px; margin: -1px;
+    background: #95ABC2;
+    position: absolute; top: 0; bottom: 0;
+    right: 30px;
+    border: 2px solid #1C2A35; border-radius: 19px;
+    transition: all 0.3s ease-in 0s; 
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+    margin-left: 0;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+    right: 0px; 
+}
+
+.no-right-padding {
+  padding-top: 0 !important;
+  padding-left: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.no-left-padding {
+  padding-top: 0 !important;
+  padding-right: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+#elements{
+  height: 100%;
+}
+
+@font-face {
+  font-family: 'ProximaFont';
+  src: url(../fonts/ProximaNova-Reg.otf);
+}
+
+
+
+
+
+
+
