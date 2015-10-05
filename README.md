@@ -1,5 +1,5 @@
 # WeeblyProject
-trial weebly project:
+Trial Weebly Project:
 
 - Monday:  CSS/DOM
 - Tuesday: Backbone Models & Views & MongoDB
@@ -11,5 +11,9 @@ trial weebly project:
 All the things:
 
 - Bootstrap 3.3.5
-- jQuer
+- jQuery 
+- jQuery UI
 - Backbone.js
+- Handlebars.js
+- Backbone-MongoDB.js
+- MongoDB
