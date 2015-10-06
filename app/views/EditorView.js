@@ -66,7 +66,7 @@ App.EditorView = Backbone.View.extend({
     },
 
     render: function() {
-
+        debugger
         var self = this;
         var template = Handlebars.templates['editor'];
         var html = template(this.model.toJSON());
@@ -76,7 +76,6 @@ App.EditorView = Backbone.View.extend({
         this.$el.css("height","100%");
         this.elements = this.$("#elements");
         if (this.model.has("dom")) {
-            debugger
             this.elements.html(this.model.get("dom"));
         }
 
