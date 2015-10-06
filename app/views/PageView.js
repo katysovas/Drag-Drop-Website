@@ -1,9 +1,11 @@
 App.PageView = Backbone.View.extend({
     className: "page-tab page-tab-title",
     events: {
-        "click":"activeTemplate",
-        "click .page-delete":"removeItem",
-        "click .page-edit":"editTitle"
+        "click": "activeTemplate",
+        "click .js-tab-delete": "removeItem",
+        "click .js-tab-edit": "editTitle", 
+        "mouseover .js-tab-delete" : "addHoverWithDelay",
+        "mouseout .js-tab-delete" : "removeHoverWithDelay"
     },
 
     initialize: function(){
@@ -18,12 +20,28 @@ App.PageView = Backbone.View.extend({
             this.$el.parent().children().removeClass("active");
             this.$el.addClass("active");
 
-            //Show the page on the main area
             App.trigger("editor:show",this.model);
         }
     },
     removeItem: function() {
         App.trigger("deleteItem",this.model, this.$el.hasClass("active"));
+    },
+    addHoverWithDelay: function(e){
+        debugger
+        var timeoutId;
+        var target = $(e.target);
+        if (!timeoutId) {
+            timeoutId = window.setTimeout(function() {
+                timeoutId = null;
+                target.parent().addClass('red-tab');
+           }, 500);
+        }
+        
+    },
+    removeHoverWithDelay: function(e){
+         var target = $(e.target);
+         target.parent().removeClass('red-tab');
+
     },
     toggleClass: function() {
         this.isDeleting = !this.isDeleting;

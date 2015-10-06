@@ -251,25 +251,26 @@
   visibility: hidden;
 }
 
-.page-edit {
+.js-tab-edit {
   left: 10px;
   top: 0px;
   color: #94A2AF;
   font-size: 12px;
-  cursor: pointer;
+}
+
+.red-tab{
+  background-color: #D86A65 !important;
 }
 
 .active .page-edit, .active .page-delete{
   color: #96BADF;
 }
 
-.page-delete{
+.js-tab-delete{
   top: -20px;
   left: 132px;
-  visibility: hidden;
   color: #94A2AF;
   font-size: 15px;
-  cursor: pointer;
 }
 
 .page-tab:hover .page-tab-settings-icons {

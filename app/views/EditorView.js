@@ -9,8 +9,8 @@ App.EditorView = Backbone.View.extend({
         "mouseout .js-removeElement": "removeBorder"
     },
 
-    saveTextEdition: function(event) {
-        var target = $(event.target);
+    saveTextEdition: function(e) {
+        var target = $(e.target);
         target.html(target.val());
         App.trigger("savePageDOM",this.model,this.elements.html());
     },
