@@ -1,23 +1,31 @@
 App.EditorView = Backbone.View.extend({
 
     events: {
-        "change textarea":"saveTextEdition",
+        "change textarea":"saveTextareaText",
         "click .js-removeElement":"removeElement",
-        "change input":"saveTitleEdition",
+        "change input":"saveTitleText",
         "click .image-placeholder":"addImage",
         "mouseover .js-removeElement": "addBorder",
-        "mouseout .js-removeElement": "removeBorder"
+        "mouseout .js-removeElement": "removeBorder",
+        "keyup .title" : "saveTitleOnEnter" 
     },
 
-    saveTextEdition: function(e) {
+    saveTextareaText: function(e) {
         var target = $(e.target);
         target.html(target.val());
         App.trigger("savePageDOM",this.model,this.elements.html());
     },
-    saveTitleEdition: function() {
+    saveTitleText: function() {
         var target = $(event.target);
         target.attr("value",target.val());
         App.trigger("savePageDOM",this.model,this.elements.html());
+    },
+
+    saveTitleOnEnter: function(e){
+        if(e.keyCode == 13){    
+            this.saveTitleText(); 
+            $(e.target).blur();
+        }
     },
 
     removeElement: function(e){
@@ -80,7 +88,7 @@ App.EditorView = Backbone.View.extend({
 
         this.elements.sortable({
             cancel: "textarea,input",
-            placeholder: "sort-placeholder-highlight",
+            placeholder: "sort-highlight",
             stop: function() {
                 App.trigger("savePageDOM",self.model,self.elements.html());
             }
@@ -108,7 +116,7 @@ App.EditorView = Backbone.View.extend({
                             $(this).css('height', 'auto' );
                             $(this).height( this.scrollHeight );
                         });
-                        $('#elements').find( 'textarea' ).keyup();
+                        $('#elements').find('textarea').keyup();
 
                         App.trigger("savePageDOM",self.model,self.elements.html());
 
@@ -117,8 +125,9 @@ App.EditorView = Backbone.View.extend({
                         var countTitle = self.$('.title-row').length;
                         var elementId = self.model.get("id")+"_title_"+countTitle;
                         var titleDOM = '<div id='+elementId+' class="title-row"><span class="glyphicon glyphicon-move" style="display:none;float: left;" aria-hidden="true"></span><span class="glyphicon glyphicon-remove js-removeElement" aria-hidden="true"></span><input class="title" style="border: none;" placeholder="Add Title Here"></div>';
-                        self.elements.append(titleDOM).focus();
+                        self.elements.append(titleDOM);
                         App.trigger("savePageDOM",self.model,self.elements.html());
+                        $('#' + elementId).find('input').focus();
                         break;
                     default:
                         //do nothing

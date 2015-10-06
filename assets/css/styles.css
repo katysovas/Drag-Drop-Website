@@ -385,15 +385,10 @@ textarea {
   padding-top: 1.1em; /* prevents text jump on Enter keypress */
 }
 
-.sort-placeholder-highlight {
+.sort-highlight {
   height: 1px;
-  border-color: #8cc2f5;
+  border-color: #8CC2F5;
   border-style: dashed;
-}
-
-.ui-resizable-s {
-  background-color: #8cc2f5;
-  height: 2px;
 }
 
 .js-removeElement{
@@ -422,9 +417,3 @@ textarea {
 .red-border{
   border-color:#EC7C76;
 }
-
-
-
-
-
-

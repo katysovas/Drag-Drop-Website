@@ -22,15 +22,11 @@
             this.reLoadPages();
         },
         initComponents: function() {
-            var config =  {appendTo: "body", helper: "clone"};
+            var settings =  {appendTo: "body", helper: "clone"};
 
-            this.$("#image-element").draggable(config);
-
-            // Dragging text elements.
-            this.$("#text-element").draggable(config);
-
-            // Dragging text elements.
-            this.$("#title-element").draggable(config);
+            this.$("#image-element").draggable(settings);
+            this.$("#text-element").draggable(settings);
+            this.$("#title-element").draggable(settings);
         },
         showEditor: function(page) {
             if (page) {
@@ -46,9 +42,9 @@
                  self.reLoadPages();
             }});
 
-            if (isActive) {   //If is the active page, clean the editor area
+            if (isActive) 
                 App.trigger("editor:show");
-            }
+
         },
         reLoadPages: function() {
             var self = this;
