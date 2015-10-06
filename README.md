@@ -21,6 +21,8 @@ All the things:
 
 The Good Things:
 
+- Templates are pre-compiled for CDN cashing
+
 
 The Bad Things:
 
