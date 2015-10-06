@@ -66,7 +66,6 @@ App.EditorView = Backbone.View.extend({
     },
 
     render: function() {
-        debugger
         var self = this;
         var template = Handlebars.templates['editor'];
         var html = template(this.model.toJSON());
@@ -123,8 +122,7 @@ App.EditorView = Backbone.View.extend({
                         break;
                     default:
                         //do nothing
-                }
-                
+                }                
             }
         });
 

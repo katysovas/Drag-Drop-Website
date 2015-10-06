@@ -48,27 +48,24 @@ App.PageView = Backbone.View.extend({
     },
     
     editTabName: function() {
-        debugger
         this.tabTitle = this.$(".js-tab-title");
         if (this.tabTitle.prop("readOnly")) {
             this.tabTitle.focus();
-            this.tabTitle.prop("readOnly",false);
+            this.tabTitle.prop("readonly",false);
         } else {
-            debugger
             if (this.tabTitle.val().length > 0){                
                 this.model.set("title",this.tabTitle.val());
                 this.model.save();
-                this.tabTitle.prop("readOnly",true);  
+                this.tabTitle.prop("readonly",true);  
             }          
         }
-
     },
 
     saveTabNameonEnter: function(e){
 
         if(e.keyCode == 13)          
             this.editTabName();  
-           // return false;         
+            App.trigger("editor:show",this.model);       
         
     },
     render: function() {
