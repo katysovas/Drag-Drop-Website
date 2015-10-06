@@ -3,9 +3,9 @@ App.PageView = Backbone.View.extend({
     events: {
         "click": "activeTemplate",
         "click .js-tab-delete": "removeItem",
-        "click .js-tab-edit": "editTitle", 
-        "mouseover .js-tab-delete" : "addHoverWithDelay",
-        "mouseout .js-tab-delete" : "removeHoverWithDelay"
+        "click .js-tab-edit": "editPageName", 
+        "mouseenter .js-tab-delete" : "addHoverWithDelay",
+        "mouseleave .js-tab-delete" : "removeHoverWithDelay"
     },
 
     initialize: function(){
@@ -19,7 +19,6 @@ App.PageView = Backbone.View.extend({
         if (!this.isDeleting) {
             this.$el.parent().children().removeClass("active");
             this.$el.addClass("active");
-
             App.trigger("editor:show",this.model);
         }
     },
@@ -27,27 +26,32 @@ App.PageView = Backbone.View.extend({
         App.trigger("deleteItem",this.model, this.$el.hasClass("active"));
     },
     addHoverWithDelay: function(e){
-        debugger
-        var timeoutId;
+        //window.timeoutId;
         var target = $(e.target);
-        if (!timeoutId) {
-            timeoutId = window.setTimeout(function() {
-                timeoutId = null;
+        if (!window.timeoutId) {
+            window.timeoutId = window.setTimeout(function() {
+                window.timeoutId = null;
+
                 target.parent().addClass('red-tab');
            }, 500);
-        }
-        
+        }        
     },
     removeHoverWithDelay: function(e){
-         var target = $(e.target);
-         target.parent().removeClass('red-tab');
 
+        if (window.timeoutId) {
+            window.clearTimeout(window.timeoutId);
+            window.timeoutId = null;
+        }
+        else {
+            var target = $(e.target);
+            target.parent().removeClass('red-tab');
+        }
     },
     toggleClass: function() {
         this.isDeleting = !this.isDeleting;
         this.$el.toggleClass("delete-hover");
     },
-    editTitle: function() {
+    editPageName: function() {
         this.pageTitle = this.$("#page-title");
         if (this.pageTitle.prop("readOnly")) {
             this.pageTitle.focus();

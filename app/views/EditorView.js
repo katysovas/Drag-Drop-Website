@@ -51,7 +51,7 @@ App.EditorView = Backbone.View.extend({
                 imageParent.find('.js-removeElement').after(img);
 
                 //TODO: save image to MongoDB
-                App.trigger("savePageDOM",self.model,self.elements.html());
+                //App.trigger("savePageDOM",self.model,self.elements.html());
             }
         });
 
