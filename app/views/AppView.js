@@ -5,6 +5,7 @@
         el: '.wrapper',
         events: {
             "click #plus-sign":"createPage"
+            //"mousedown #title-element" : "draggingTitle"
         },
         initialize: function() {
             App.User = new Models.User({id: "560d69c5e4b0d5afa45748b1"}); //Default user id
@@ -27,6 +28,9 @@
             this.$("#image-element").draggable(settings);
             this.$("#text-element").draggable(settings);
             this.$("#title-element").draggable(settings);
+        },
+        draggingTitle: function(e){
+            // hide original item while dragging
         },
         showEditor: function(page) {
             if (page) {

@@ -57,9 +57,12 @@ App.EditorView = Backbone.View.extend({
                 imageParent.find('.text-center').remove();
                 imageParent.addClass('image-body-row-has-image');
                 imageParent.find('.js-removeElement').after(img);
-
-                //TODO: save image to MongoDB
-                //App.trigger("savePageDOM",self.model,self.elements.html());
+                
+                setTimeout(function(){ 
+                    App.trigger("savePageDOM",self.model,self.elements.html());
+                }, 
+                1000);
+                
             }
         });
 
@@ -110,7 +113,7 @@ App.EditorView = Backbone.View.extend({
                         var countText = self.$('.text-row').length;
                         var elementId = self.model.get("id")+"_text_"+countText;
                         var textDOM = '<div id='+elementId+' class="text-row ui-resizable"><span class="glyphicon glyphicon-move" style="display:none;float: left;" aria-hidden="true"></span><span class="glyphicon glyphicon-remove js-removeElement" aria-hidden="true"></span><textarea class="text" placeholder="Enter text here."></textarea></div>';
-                        self.elements.append(textDOM).focus();
+                        self.elements.append(textDOM);
                         
                         $('#elements').on( 'keyup', 'textarea', function (e){
                             $(this).css('height', 'auto' );
@@ -119,6 +122,8 @@ App.EditorView = Backbone.View.extend({
                         $('#elements').find('textarea').keyup();
 
                         App.trigger("savePageDOM",self.model,self.elements.html());
+
+                        $('#' + elementId).find('textarea').focus();
 
                         break;
                     case "title-element":
