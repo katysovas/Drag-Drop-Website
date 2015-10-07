@@ -400,8 +400,12 @@ textarea {
 .title-row:hover .js-removeElement {
     display: inline-block !important;
     padding: 5px;
-    color: #FFF;
+    color: #8FC7FF;
     cursor: pointer;
+}
+
+.image-body-row:hover .js-removeElement{
+  color: #FFF !important;
 }
 
 .image-body-row:hover {
@@ -431,6 +435,10 @@ textarea {
 
 .red-border .elementCorner{
   border-color: transparent #EC7C76 transparent transparent !important;
+}
+
+.red-border .glyphicon-move{
+  color: #EC7C76 !important;
 }
 
 .red-border{
