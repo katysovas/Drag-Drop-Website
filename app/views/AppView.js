@@ -8,15 +8,18 @@
             autosave: 30000 //30s
         },
         events: {
-            "click #plus-sign":"createPage"
+            "click #plus-sign" : "createPage",
             //"mousedown #title-element" : "draggingTitle"
         },
+
         initialize: function() {
             App.User = new Models.User({id: "560d69c5e4b0d5afa45748b1"}); //Default user id
 
             App.bind("deleteItem", this.deletePage, this);
             App.bind("editor:show", this.showEditor, this);
             App.bind("saveDOM", this.saveDOM, this);
+
+            App.bind("saveOnExit", this.saveOnExit, this);
 
             this.$list = this.$("#templatesList");
             this.$editor = this.$("#editor-canvas");
@@ -25,6 +28,7 @@
             this.initComponents();
             this.collection = new Models.PageCollection([],{userId: App.User.get("id")});
             this.reLoadPages();
+
         },
         initComponents: function() {
             var settings =  {appendTo: "body", helper: "clone"};
@@ -55,6 +59,7 @@
         reLoadPages: function() {
             var self = this;
             this.collection.fetch({success: function(){
+                self.collection.localStorage = new Backbone.LocalStorage("Weebly");
                 self.renderPages();
             }});
         },
@@ -68,24 +73,15 @@
         },
         saveDOM: function(model,html) {
             model.set("dom",html);
-
-            model.save();
-            this.saveToLocaleStorage(model, html);
+            model.save({ "dom": html }, { ajaxSync: true });
 
             $('.js-autosave').addClass('active-save');
 
             var intervalID = setInterval(function(){
-                console.log('auto saving every ' + this.defaults.autosave);
-                model.save();
+                console.log('auto saving');
+                model.save({ "dom": html }, { ajaxSync: true });
             }, this.defaults.autosave);
 
-        },
-
-        saveToLocaleStorage: function(model, html){
-            if (typeof localStorage !== "undefined") {
-                localStorage.setItem("dom", html);
-            }else
-                model.save();
         },
         createPage: function() {
             var self = this;

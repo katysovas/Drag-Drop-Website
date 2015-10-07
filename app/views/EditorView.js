@@ -7,7 +7,7 @@ App.EditorView = Backbone.View.extend({
         "click .image-placeholder":"addImage",
         "mouseover .js-removeElement": "addBorder",
         "mouseout .js-removeElement": "removeBorder",
-        "keyup .title" : "saveTitleOnEnter" 
+        "keyup .title" : "saveTitleOnEnter"        
     },
 
     saveTextareaText: function(e) {
