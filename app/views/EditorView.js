@@ -13,12 +13,12 @@ App.EditorView = Backbone.View.extend({
     saveTextareaText: function(e) {
         var target = $(e.target);
         target.html(target.val());
-        App.trigger("savePageDOM",this.model,this.elements.html());
+        App.trigger("saveDOM",this.model,this.elements.html());
     },
     saveTitleText: function() {
         var target = $(event.target);
         target.attr("value",target.val());
-        App.trigger("savePageDOM",this.model,this.elements.html());
+        App.trigger("saveDOM",this.model,this.elements.html());
     },
 
     saveTitleOnEnter: function(e){
@@ -30,7 +30,7 @@ App.EditorView = Backbone.View.extend({
 
     removeElement: function(e){
         $(e.target).parent().remove();
-        App.trigger("savePageDOM",this.model,this.elements.html());
+        App.trigger("saveDOM",this.model,this.elements.html());
     },
 
     addImage: function(e){
@@ -57,19 +57,23 @@ App.EditorView = Backbone.View.extend({
                 imageParent.find('.text-center').remove();
                 imageParent.addClass('image-body-row-has-image');
                 imageParent.find('.js-removeElement').after(img);
-                
+
                 setTimeout(function(){ 
-                    App.trigger("savePageDOM",self.model,self.elements.html());
+                    App.trigger("saveDOM",self.model,self.elements.html());
                 }, 
-                1000);
-                
+                1000);                
             }
         });
 
     },
 
     addBorder: function(e){$(e.target).parent()
-        $(e.target).parent().addClass('red-border');
+        debugger
+        var targetParent = $(e.target).parent();
+        targetParent.addClass('red-border');
+        debugger
+        if (targetParent.hasClass('image-body-row-has-image'))
+            targetParent.prop('border', 'solid');
     },
 
     removeBorder: function(e){
@@ -93,7 +97,7 @@ App.EditorView = Backbone.View.extend({
             cancel: "textarea,input",
             placeholder: "sort-highlight",
             stop: function() {
-                App.trigger("savePageDOM",self.model,self.elements.html());
+                App.trigger("saveDOM",self.model,self.elements.html());
             }
         });
         this.elements.droppable({
@@ -107,7 +111,7 @@ App.EditorView = Backbone.View.extend({
                         var imageDOM = '<div id=' + elementId+' class="image-body-row ui-resizable"><span class="glyphicon glyphicon-move" style="display:none;float: left;" aria-hidden="true"></span><span class="glyphicon glyphicon-remove js-removeElement" aria-hidden="true"></span><input id="image-upload-' + elementId +'" class="hidden js-uploadImage" type="file"><img class="image-placeholder" src="assets/images/placeholder.png"><div class="text-center"><p class="image-placeholder-text">ADD IMAGE</p><span class="plus-sign glyphicon glyphicon-plus image-plus "</span></div></div>';
                         self.elements.append(imageDOM);
 
-                        App.trigger("savePageDOM",self.model,self.elements.html());
+                        App.trigger("saveDOM",self.model,self.elements.html());
                         break;
                     case "text-element":
                         var countText = self.$('.text-row').length;
@@ -121,7 +125,7 @@ App.EditorView = Backbone.View.extend({
                         });
                         $('#elements').find('textarea').keyup();
 
-                        App.trigger("savePageDOM",self.model,self.elements.html());
+                        App.trigger("saveDOM",self.model,self.elements.html());
 
                         $('#' + elementId).find('textarea').focus();
 
@@ -131,7 +135,7 @@ App.EditorView = Backbone.View.extend({
                         var elementId = self.model.get("id")+"_title_"+countTitle;
                         var titleDOM = '<div id='+elementId+' class="title-row"><span class="glyphicon glyphicon-move" style="display:none;float: left;" aria-hidden="true"></span><span class="glyphicon glyphicon-remove js-removeElement" aria-hidden="true"></span><input class="title" style="border: none;" placeholder="Add Title Here"></div>';
                         self.elements.append(titleDOM);
-                        App.trigger("savePageDOM",self.model,self.elements.html());
+                        App.trigger("saveDOM",self.model,self.elements.html());
                         $('#' + elementId).find('input').focus();
                         break;
                     default:

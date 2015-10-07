@@ -12,7 +12,7 @@
 
             App.bind("deleteItem", this.deletePage, this);
             App.bind("editor:show", this.showEditor, this);
-            App.bind("savePageDOM", this.savePageDOM, this);
+            App.bind("saveDOM", this.saveDOM, this);
 
             this.$list = this.$("#templatesList");
             this.$editor = this.$("#editor-canvas");
@@ -40,15 +40,13 @@
                 this.$editor.html(" ");
             }
         },
-        deletePage: function(model, isActive) {
+        deletePage: function(model) {
             var self = this;
             model.destroy({success: function() {
                  self.reLoadPages();
             }});
 
-            if (isActive) 
-                App.trigger("editor:show");
-
+            App.trigger("editor:show");
         },
         reLoadPages: function() {
             var self = this;
@@ -64,7 +62,7 @@
             var view = new App.PageView({ model: page });
             this.$list.append(view.render().el);
         },
-        savePageDOM: function(model,html) {
+        saveDOM: function(model,html) {
             model.set("dom",html);
             //save it via intervals or on exit?
             model.save();

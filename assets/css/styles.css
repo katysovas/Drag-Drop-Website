@@ -282,7 +282,7 @@
 
 .page-nav-row {
   margin: 45px auto;
-  width: 87%;
+  width: 90%;
 }
 
 .page-tab-nav {
@@ -309,7 +309,7 @@
 }
 
 .image-body-row {
-  width: 87%;
+  width: 90%;
   height: 283px;
   margin: 50px auto;
   border-style: solid;
@@ -321,10 +321,9 @@
 
 .image-body-row-has-image{
 
-  width: 87%;
   height: auto !important;
   margin: 50px auto;
-  border: none !important;
+  border: none;
   background-color: #fff !important;
 }
 
@@ -358,7 +357,7 @@
 }
 
 .title-row {
-  width: 87%;
+  width: 90%;
   margin: 40px auto;
 }
 
@@ -369,7 +368,7 @@
 }
 
 .text-row {
-  width: 87%;
+  width: 90%;
   margin: 5px auto 50px auto;
 }
 
