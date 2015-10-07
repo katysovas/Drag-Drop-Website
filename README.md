@@ -22,7 +22,7 @@ All the things:
 The Good Things:
 
 - The templates are pre-compiled for CDN cashing
-- Instead of talking to DB after each change, I manipulate with the localstorage. We save to DB on exit, switching pages or enabling Autosave mode.
+- Using cache to save some DB calls
 
 The Bad Things:
 
