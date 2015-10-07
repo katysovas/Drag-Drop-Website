@@ -28,3 +28,4 @@ The Bad Things:
 
 - should use AWS or GridFS for storing images instead of data uri base64
 - didn't test on IE
+- Site Grid don't work
