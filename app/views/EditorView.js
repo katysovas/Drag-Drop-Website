@@ -68,20 +68,13 @@ App.EditorView = Backbone.View.extend({
     },
 
     addBorder: function(e){$(e.target).parent()
-        debugger
         var targetParent = $(e.target).parent();
         targetParent.addClass('red-border');
-
-        targetParent.find('.elementCorner').show();
-        debugger
-        if (targetParent.hasClass('image-body-row-has-image'))
-            targetParent.prop('border', 'solid');
     },
 
     removeBorder: function(e){
         var targetParent = $(e.target).parent();
         targetParent.removeClass('red-border');
-        targetParent.find('.elementCorner').hide();
     },
 
     render: function() {

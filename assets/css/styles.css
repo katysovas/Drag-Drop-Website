@@ -398,32 +398,41 @@ textarea {
 .text-row:hover .js-removeElement,
 .image-body-row:hover .js-removeElement,
 .title-row:hover .js-removeElement {
-    display: block !important;
+    display: inline-block !important;
     padding: 5px;
     color: #FFF;
     cursor: pointer;
 }
 
-.elementCorner{
-    display: none;
+.image-body-row:hover {
+  border-color: #8FC7FF;
+}
+
+.image-body-row:hover .elementCorner{
+    display: inline;
     width: 0;
     height: 0;
     float: right;
     margin-right: -24px;
     border-style: solid;
     border-width: 0 40px 40px 0;
-    border-color: transparent #ec7b76 transparent transparent;
+    border-color: transparent #8FC7FF transparent transparent;
 }
 
 .text-row:hover .glyphicon-move,
 .image-body-row:hover .glyphicon-move,
 .title-row:hover .glyphicon-move {
+    color: #8FC7FF;
     display: inline-block !important;
     padding: 5px;
     cursor: pointer;
     overflow: auto;
 }
 
+.red-border .elementCorner{
+  border-color: transparent #EC7C76 transparent transparent !important;
+}
+
 .red-border{
-  border-color:#EC7C76;
+  border-color:#EC7C76 !important;
 }
