@@ -71,13 +71,17 @@ App.EditorView = Backbone.View.extend({
         debugger
         var targetParent = $(e.target).parent();
         targetParent.addClass('red-border');
+
+        targetParent.find('.elementCorner').show();
         debugger
         if (targetParent.hasClass('image-body-row-has-image'))
             targetParent.prop('border', 'solid');
     },
 
     removeBorder: function(e){
-        $(e.target).parent().removeClass('red-border');
+        var targetParent = $(e.target).parent();
+        targetParent.removeClass('red-border');
+        targetParent.find('.elementCorner').hide();
     },
 
     render: function() {
@@ -108,7 +112,7 @@ App.EditorView = Backbone.View.extend({
                     case "image-element":
                         var countImages = self.$('.image-body-row').length;
                         var elementId = self.model.get("id")+"_images_"+countImages;
-                        var imageDOM = '<div id=' + elementId+' class="image-body-row ui-resizable"><span class="glyphicon glyphicon-move" style="display:none;float: left;" aria-hidden="true"></span><span class="glyphicon glyphicon-remove js-removeElement" aria-hidden="true"></span><input id="image-upload-' + elementId +'" class="hidden js-uploadImage" type="file"><img class="image-placeholder" src="assets/images/placeholder.png"><div class="text-center"><p class="image-placeholder-text">ADD IMAGE</p><span class="plus-sign glyphicon glyphicon-plus image-plus "</span></div></div>';
+                        var imageDOM = '<div id=' + elementId+' class="image-body-row ui-resizable"><span class="glyphicon glyphicon-move" style="display:none;float: left;" aria-hidden="true"></span><span class="glyphicon glyphicon-remove js-removeElement" aria-hidden="true"></span><span class="elementCorner"></span><input id="image-upload-' + elementId +'" class="hidden js-uploadImage" type="file"><img class="image-placeholder" src="assets/images/placeholder.png"><div class="text-center"><p class="image-placeholder-text">ADD IMAGE</p><span class="plus-sign glyphicon glyphicon-plus image-plus "</span></div></div>';
                         self.elements.append(imageDOM);
 
                         App.trigger("saveDOM",self.model,self.elements.html());

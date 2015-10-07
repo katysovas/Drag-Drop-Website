@@ -8,7 +8,7 @@
   color: #FFF;
 }
 
-.js-account-menu{
+.js-account-menu {
   font-family: "ProximaFont";
   padding-right: 50px;
   float:right;
@@ -390,7 +390,7 @@ textarea {
   border-style: dashed;
 }
 
-.js-removeElement{
+.js-removeElement {
   display:none;
   float: right;
 }
@@ -400,8 +400,19 @@ textarea {
 .title-row:hover .js-removeElement {
     display: block !important;
     padding: 5px;
-    color: #EC7C76;
+    color: #FFF;
     cursor: pointer;
+}
+
+.elementCorner{
+    display: none;
+    width: 0;
+    height: 0;
+    float: right;
+    margin-right: -24px;
+    border-style: solid;
+    border-width: 0 40px 40px 0;
+    border-color: transparent #ec7b76 transparent transparent;
 }
 
 .text-row:hover .glyphicon-move,
