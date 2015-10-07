@@ -3,6 +3,10 @@
 
     App.AppView = Backbone.View.extend({
         el: '.wrapper',
+
+        defaults:{
+            autosave: 30000 //30s
+        },
         events: {
             "click #plus-sign":"createPage"
             //"mousedown #title-element" : "draggingTitle"
@@ -64,10 +68,19 @@
         },
         saveDOM: function(model,html) {
             model.set("dom",html);
-            //save it via intervals or on exit?
+
             model.save();
             this.saveToLocaleStorage(model, html);
+
+            $('.js-autosave').addClass('active-save');
+
+            var intervalID = setInterval(function(){
+                console.log('auto saving every ' + this.defaults.autosave);
+                model.save();
+            }, this.defaults.autosave);
+
         },
+
         saveToLocaleStorage: function(model, html){
             if (typeof localStorage !== "undefined") {
                 localStorage.setItem("dom", html);
