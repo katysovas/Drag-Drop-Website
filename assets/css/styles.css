@@ -359,6 +359,7 @@
 .title-row {
   width: 90%;
   margin: 40px auto;
+  position: relative;
 }
 
 .title {
@@ -368,8 +369,9 @@
 }
 
 .text-row {
-  width: 90%;
-  margin: 5px auto 50px auto;
+  width: 95%;
+  margin: 50px;
+  position: relative;
 }
 
 .text {
@@ -390,7 +392,20 @@ textarea {
   border-style: dashed;
 }
 
-.js-removeElement {
+.title-row .js-removeElement {
+  position: absolute;
+  display:none;
+  float: right;
+  margin-left: 270px;
+}
+
+.text-row .js-removeElement{
+  position: absolute;
+  display:none;
+  right: 55px;
+}
+
+.image-body-row .js-removeElement {  
   display:none;
   float: right;
 }
@@ -423,22 +438,8 @@ textarea {
     border-color: transparent #8FC7FF transparent transparent;
 }
 
-.text-row:hover .glyphicon-move,
-.image-body-row:hover .glyphicon-move,
-.title-row:hover .glyphicon-move {
-    color: #8FC7FF;
-    display: inline-block !important;
-    padding: 5px;
-    cursor: pointer;
-    overflow: auto;
-}
-
 .red-border .elementCorner{
   border-color: transparent #EC7C76 transparent transparent !important;
-}
-
-.red-border .glyphicon-move{
-  color: #EC7C76 !important;
 }
 
 .red-border{
