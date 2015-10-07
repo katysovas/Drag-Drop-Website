@@ -21,11 +21,11 @@ All the things:
 
 The Good Things:
 
-- Templates are pre-compiled for CDN cashing
-
+- The templates are pre-compiled for CDN cashing
+- Instead of talking to DB after each change, I manipulate with the localstorage. We save to DB on exit, switching pages or enabling Autosave mode.
 
 The Bad Things:
 
 - should use AWS or GridFS for storing images instead of data uri base64
 - didn't test on IE
-- Site Grid don't work
+- Site Grid doesn't work
