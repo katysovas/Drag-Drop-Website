@@ -16,4 +16,16 @@ All the things:
 - Backbone.js 1.2.3
 - Handlebars.js 4.0.3
 - Backbone-MongoDB.js
-- MongoDB
+- MongoDB (mongolabs)
+
+
+The Good Things:
+
+- The templates are pre-compiled for CDN cashing
+- Using cache to save some DB calls
+
+The Bad Things:
+
+- should use AWS or GridFS for storing images instead of data uri base64
+- didn't test on IE
+- Site Grid doesn't work
