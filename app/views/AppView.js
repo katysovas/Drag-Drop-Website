@@ -19,6 +19,7 @@
             App.bind("deleteItem", this.deletePage, this);
             App.bind("editor:show", this.showEditor, this);
             App.bind("saveDOM", this.saveDOM, this);
+            App.bind("showLogin", this.showLogin, this);
 
             this.tabList = this.$("#templatesList");
             this.editor = this.$(".js-editor-canvas");
