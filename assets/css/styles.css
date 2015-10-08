@@ -18,7 +18,8 @@
   color: #B9B9B9;
 }
 
-.js-autosave:hover, .js-welcome:hover, .active-save{
+.js-autosave:hover, .js-welcome:hover, 
+.active-save{
   color: #FFF !important;
 }
 
@@ -269,7 +270,8 @@
   background-color: #D86A65 !important;
 }
 
-.active .page-edit, .active .page-delete{
+.active .page-edit, 
+.active .page-delete{
   color: #96BADF;
 }
 
@@ -318,7 +320,7 @@
   margin: 50px auto;
   border-style: solid;
   border-radius: 5px;
-  border-width: 2px;
+  border-width: 3px;
   border-color: #8498AC;
   background-color: #EFF2F5;
 }
@@ -366,28 +368,30 @@
 
 
 .text-row {
-  width: 95%;
-  margin: 50px;
+  width: 90%;
+  margin: 50px auto;
   position: relative;
+   border: 3px solid transparent;
 }
 
 .text {
   resize: vertical;
-  width: 95%;
+  width: 100%;
   border: none;
   height: auto;
-  border: 3px solid transparent;
+  overflow-y: hidden;
 }
 
-.text:hover {
+.text:focus{
+  outline:0;
+}
+
+.text-row:hover {
     border: 3px solid #8FC7FF;
     border-radius: 5px;
 }
 
-textarea {
-  overflow-y: hidden; /* prevents scroll bar flash */
-  padding-top: 1.1em; /* prevents text jump on Enter keypress */
-}
+
 
 .sort-highlight {
   height: 1px;
@@ -403,9 +407,8 @@ textarea {
 }
 
 .text-row .js-removeElement{
-  position: absolute;
   display:none;
-  right: 55px;
+  float: right;
 }
 
 .image-body-row .js-removeElement {  
@@ -422,8 +425,9 @@ textarea {
     cursor: pointer;
 }
 
-.image-body-row:hover .js-removeElement{
-  color: #FFF !important;
+.image-body-row:hover .js-removeElement, 
+.text-row:hover .js-removeElement{
+    color: #FFF !important;
 }
 
 .image-body-row:hover{
@@ -442,7 +446,7 @@ textarea {
   border: 3px solid transparent;
 }
 
-.image-body-row:hover .elementCorner{
+.image-body-row:hover .elementCorner, .text-row:hover .elementCorner{
     display: inline;
     width: 0;
     height: 0;

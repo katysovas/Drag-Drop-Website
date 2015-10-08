@@ -67,7 +67,7 @@ App.EditorView = Backbone.View.extend({
 
     },
 
-    addBorder: function(e){$(e.target).parent()
+    addBorder: function(e){
         var targetParent = $(e.target).parent();
         targetParent.addClass('red-border');
     },
@@ -104,16 +104,16 @@ App.EditorView = Backbone.View.extend({
                 switch(elementDragged) {
                     case "image-element":
                         var countImages = self.$('.image-body-row').length;
-                        var elementId = self.model.get("id")+"_images_"+countImages;
-                        var imageDOM = '<div id=' + elementId+' class="image-body-row ui-resizable"></span><span class="glyphicon glyphicon-remove js-removeElement" aria-hidden="true"></span><span class="elementCorner"></span><input id="image-upload-' + elementId +'" class="hidden js-uploadImage" type="file"><img class="image-placeholder" src="assets/images/placeholder.png"><div class="text-center"><p class="image-placeholder-text">ADD IMAGE</p><span class="plus-sign glyphicon glyphicon-plus image-plus "</span></div></div>';
+                        var elementId = self.model.get("id") + "_images_" + countImages;
+                        var imageDOM = '<div id=' + elementId +' class="image-body-row ui-resizable"></span><span class="glyphicon glyphicon-remove js-removeElement" aria-hidden="true"></span><span class="elementCorner"></span><input id="image-upload-' + elementId +'" class="hidden js-uploadImage" type="file"><img class="image-placeholder" src="assets/images/placeholder.png"><div class="text-center"><p class="image-placeholder-text">ADD IMAGE</p><span class="plus-sign glyphicon glyphicon-plus image-plus "</span></div></div>';
                         self.elements.append(imageDOM);
 
                         App.trigger("saveDOM",self.model,self.elements.html());
                         break;
                     case "text-element":
                         var countText = self.$('.text-row').length;
-                        var elementId = self.model.get("id")+"_text_"+countText;
-                        var textDOM = '<div id='+elementId+' class="text-row ui-resizable"></span><span class="glyphicon glyphicon-remove js-removeElement" aria-hidden="true"></span><textarea class="text" placeholder="Enter text here."></textarea></div>';
+                        var elementId = self.model.get("id") + "_text_" + countText;
+                        var textDOM = '<div id=' + elementId + ' class="text-row ui-resizable"></span><span class="glyphicon glyphicon-remove js-removeElement" aria-hidden="true"></span><span class="elementCorner"></span><textarea class="text" placeholder="Enter text here."></textarea></div>';
                         self.elements.append(textDOM);
                         
                         $('#elements').on( 'keyup', 'textarea', function (e){
@@ -121,20 +121,20 @@ App.EditorView = Backbone.View.extend({
                             $(this).height( this.scrollHeight );
                         });
                         $('#elements').find('textarea').keyup();
-
                         App.trigger("saveDOM",self.model,self.elements.html());
-
                         $('#' + elementId).find('textarea').focus();
 
                         break;
                     case "title-element":
                         var countTitle = self.$('.title-row').length;
-                        var elementId = self.model.get("id")+"_title_"+countTitle;
-                        var titleDOM = '<div id='+elementId+' class="title-row"></span><span class="glyphicon glyphicon-remove js-removeElement" aria-hidden="true"></span><input class="title" style="border: none;" placeholder="Add Title Here"></div>';
+                        var elementId = self.model.get("id") + "_title_" + countTitle;
+                        var titleDOM = '<div id=' + elementId + ' class="title-row"></span><span class="glyphicon glyphicon-remove js-removeElement" aria-hidden="true"></span><input class="title" style="border: none;" placeholder="Add Title Here"></div>';
                         self.elements.append(titleDOM);
                         App.trigger("saveDOM",self.model,self.elements.html());
                         $('#' + elementId).find('input').focus();
                         break;
+                    case "nav-element":
+                        //TODO
                     default:
                         //do nothing
                 }                
