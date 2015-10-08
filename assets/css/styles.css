@@ -4,7 +4,7 @@
   box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 1);
 }
 
-.navbar-default .navbar-nav > li > a, .js-logout{
+.navbar-default .navbar-nav > li > a{
   color: #FFF;
 }
 
@@ -18,7 +18,8 @@
   color: #B9B9B9;
 }
 
-.js-autosave:hover, .js-welcome:hover, 
+.js-autosave:hover, 
+.js-login:hover, 
 .active-save{
   color: #FFF !important;
 }

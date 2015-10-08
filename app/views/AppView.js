@@ -14,12 +14,12 @@
         initialize: function() {
 
             App.User = new Models.User({id: "560d69c5e4b0d5afa45748b1"}); //Default user id
-            window.visitor = App.User;
 
             App.bind("deleteItem", this.deletePage, this);
             App.bind("editor:show", this.showEditor, this);
             App.bind("saveDOM", this.saveDOM, this);
             App.bind("showLogin", this.showLogin, this);
+            App.bind("updateCookie", this.updateCookie, this);
 
             this.tabList = this.$("#templatesList");
             this.editor = this.$(".js-editor-canvas");
@@ -31,8 +31,18 @@
 
         },
         initComponents: function() {
-            var settings =  {appendTo: "body", helper: "clone"};
 
+            var self = this;
+
+            $('.js-login').on('click', function(){
+                self.showLogin();
+                return false;
+            });
+
+            if (window.visitor.isRegistered)
+                $('.js-login').html('Hi, ' + window.visitor.name);
+
+            var settings =  {appendTo: "body", helper: "clone"};
             this.$("#image-element").draggable(settings);
             this.$("#text-element").draggable(settings);
             this.$("#title-element").draggable(settings);
@@ -101,9 +111,19 @@
             }
         },
         showLogin: function(){
-            debugger
-            $('#myModal').modal();
+            if (!window.visitor.isRegistered)
+                $('#myModal').modal();
             return false;
+        },
+        updateCookie: function(profile){
+            $.cookie.json = true;        
+            var visitor = {
+                'name' : profile.getName(),
+                'isRegistered' : true, 
+                "id" : '560d69c5e4b0d5afa45748b1'
+            }
+            $.cookie("Weebly", visitor);
+            window.location.reload();
         }
     });
 })(jQuery);

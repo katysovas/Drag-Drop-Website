@@ -6,14 +6,12 @@ App.PageView = Backbone.View.extend({
         "click .js-tab-edit": "editTabName", 
         "mouseenter .js-tab-delete" : "addHoverWithDelay",
         "mouseleave .js-tab-delete" : "removeHoverWithDelay",
-        "keyup .js-tab-title" : "saveTabNameonEnter",
-        "click .js-welcome" : "showLogin"
+        "keyup .js-tab-title" : "saveTabNameonEnter"
     },
 
     initialize: function(){
 
         var self = this;
-
         $('#templatesList').children().removeClass('active');
         this.$el.addClass('active');
         App.trigger("editor:show",self.model);

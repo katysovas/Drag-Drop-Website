@@ -3,7 +3,8 @@ Models.User = Backbone.MongoModel.extend({
     idAttribute: '_ID',
 
     defaults: {
-        isRegistered: false
+        isRegistered: false, 
+        name: ''
     },
 
     urlRoot: BASE_URL + '/users/',
@@ -15,22 +16,28 @@ Models.User = Backbone.MongoModel.extend({
     }, 
 
     initialize: function(){
-        
+        window.visitor = {
+            isRegistered : this.defaults.isRegistered,
+            name : this.defaults.name
+        };
+        this.readCookie();
     },
 
     readCookie: function(){
-
+        $.cookie.json = true;
+        var currentUser = $.cookie('Weebly');
+        if (typeof currentUser != 'undefined' && currentUser.isRegistered){
+            this.defaults.name = currentUser.name;
+            this.defaults.isRegistered = true;
+            window.visitor = currentUser;
+        }
     }
-
-
-
-
 
 });
 
 Models.UserCollection = Backbone.Collection.extend({
     url: function() {
-        return BASE_URL + "/users/?apiKey=" + API_KEY + '&q={"user_id":"'+this.userId+'"}';
+        return BASE_URL + '/users/?apiKey=' + API_KEY + '&q={"user_id":"'+this.userId+'"}';
     },
     model: Models.User,
     initialize: function(values,options) {

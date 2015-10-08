@@ -9,3 +9,11 @@ _.extend(App, Backbone.Events);
 $(document).ready(function() {
    	new App.AppView();
 });
+
+function onSignIn(googleUser) {
+	if(!window.visitor.isRegistered){
+		var profile = googleUser.getBasicProfile();
+		if (profile)
+			App.trigger('updateCookie', profile);
+    }
+};

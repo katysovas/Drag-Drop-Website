@@ -19,9 +19,8 @@
       </div>
       <div>
         <ul class="nav navbar-nav">
-          <li><a href="#" class="js-welcome">Login</a></li>
+          <li><a href="#" class="js-login">Login</a></li>
           <li><a href="#"><span class="js-autosave glyphicon glyphicon-hourglass"></span></a></li>
-          <li><a href="http://localhost:8888/WeeblyProject/"><span class="js-logout glyphicon glyphicon-off"></span></a></li>
         </ul>
       </div>
     </nav>
@@ -104,26 +103,14 @@
         </div>
         <div class="modal-body">
           <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
-            <script>
-              function onSignIn(googleUser) {
-                var profile = googleUser.getBasicProfile();
-                console.log("ID: " + profile.getId()); 
-                console.log("Name: " + profile.getName());
-                console.log("Image URL: " + profile.getImageUrl());
-                console.log("Email: " + profile.getEmail());
-
-                var id_token = googleUser.getAuthResponse().id_token;
-                //console.log("ID Token: " + id_token);
-              };
-            </script>
-        </div>
-        
+        </div>        
       </div>
     </div>
   </div>
 
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.2.3/backbone-min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/backbone-localstorage.js/1.1.16/backbone.localStorage-min.js"></script>  
