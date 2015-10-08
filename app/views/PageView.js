@@ -58,7 +58,7 @@ App.PageView = Backbone.View.extend({
         } else {
             if (this.tabTitle.val().length > 0){                
                 this.model.set("title",this.tabTitle.val());
-                this.model.save();
+                this.model.save({"title":this.tabTitle.val()});
                 this.tabTitle.prop("readonly",true);  
             }          
         }

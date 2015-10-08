@@ -319,16 +319,8 @@
   border-style: solid;
   border-radius: 5px;
   border-width: 2px;
-  border-color: #8498ac;
-  background-color: #eff2f5;
-}
-
-.image-body-row-has-image{
-
-  height: auto !important;
-  margin: 50px auto;
-  border: none;
-  background-color: #fff !important;
+  border-color: #8498AC;
+  background-color: #EFF2F5;
 }
 
 .image-placeholder {
@@ -372,6 +364,7 @@
   color: #4f657b;
 }
 
+
 .text-row {
   width: 95%;
   margin: 50px;
@@ -383,6 +376,12 @@
   width: 95%;
   border: none;
   height: auto;
+  border: 3px solid transparent;
+}
+
+.text:hover {
+    border: 3px solid #8FC7FF;
+    border-radius: 5px;
 }
 
 textarea {
@@ -427,8 +426,20 @@ textarea {
   color: #FFF !important;
 }
 
-.image-body-row:hover {
+.image-body-row:hover{
+  border-width: 3px;
   border-color: #8FC7FF;
+}
+
+.image-body-row-has-image:hover {
+  border-color: #8FC7FF;
+}
+
+.image-body-row-has-image{
+  height: auto !important;
+  margin: 50px auto;
+  background-color: #FFF;
+  border: 3px solid transparent;
 }
 
 .image-body-row:hover .elementCorner{

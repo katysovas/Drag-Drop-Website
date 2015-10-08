@@ -27,7 +27,7 @@
 
             this.initComponents();
             this.collection = new Models.PageCollection([],{userId: App.User.get("id")});
-            this.reLoadPages();
+            this.fetchPages();
 
         },
         initComponents: function() {
@@ -51,16 +51,17 @@
         deletePage: function(model) {
             var self = this;
             model.destroy({success: function() {
-                 self.reLoadPages();
+                 self.fetchPages();
             }});
 
             App.trigger("editor:show");
+
         },
-        reLoadPages: function() {
+        fetchPages: function() {
             var self = this;
-            this.collection.fetch({success: function(){
-                self.collection.localStorage = new Backbone.LocalStorage("Weebly");
+            this.collection.fetch({success: function(){                
                 self.renderPages();
+                //self.collection.localStorage = new Backbone.LocalStorage("Weebly");
             }});
         },
         renderPages: function() {
@@ -70,28 +71,35 @@
         addPage: function (page) {
             var view = new App.PageView({ model: page });
             this.$list.append(view.render().el);
+
         },
         saveDOM: function(model,html) {
             model.set("dom",html);
-            model.save({ "dom": html }, { ajaxSync: true });
+            model.save();
 
             $('.js-autosave').addClass('active-save');
 
             var intervalID = setInterval(function(){
                 console.log('auto saving');
-                model.save({ "dom": html }, { ajaxSync: true });
+                model.save();
             }, this.defaults.autosave);
 
         },
         createPage: function() {
+            
             var self = this;
-            var newPage = new Models.Page({title: this.titleInput.val()});
-            newPage.set("user_id",App.User.get("id"));
-            newPage.save(null,{success: function(){
-                self.reLoadPages();
-            }});
+            if (this.titleInput.val().length > 0){
+                var newPage = new Models.Page({title: this.titleInput.val()});
+                
+                newPage.set("user_id",App.User.get("id"));
+                //self.collection.add(newPage);
+                newPage.save(null,{success: function(){
+                    self.fetchPages();
+                }});
 
-            this.titleInput.val("");
+                this.titleInput.val("");
+            }
+            return false;
         }
     });
 })(jQuery);
