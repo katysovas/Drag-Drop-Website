@@ -362,7 +362,6 @@
   color: #4f657b;
 }
 
-
 .text-row {
   width: 90%;
   margin: 50px auto;
@@ -376,6 +375,7 @@
   border: none;
   height: auto;
   overflow-y: hidden;
+  font-family: 'ProximaFont';
 }
 
 .js-text-area:focus{
