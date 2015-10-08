@@ -20,8 +20,8 @@
             App.bind("saveDOM", this.saveDOM, this);
 
             this.tabList = this.$("#templatesList");
-            this.$editor = this.$("#editor-canvas");
-            this.titleInput = this.$("#page-tab-font-new");
+            this.$editor = this.$(".js-editor-canvas");
+            this.titleInput = this.$(".js-page-tab-font-new");
 
             this.initComponents();
             this.collection = new Models.PageCollection([],{userId: App.User.get("id")});

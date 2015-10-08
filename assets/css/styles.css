@@ -23,7 +23,7 @@
   color: #FFF !important;
 }
 
-#logo {
+.logo {
   margin-left: 20px;
   margin-top: 5px;
   margin-bottom: -5px;
@@ -38,7 +38,7 @@
   max-width: none !important;
 }
 
-#sidebar {  
+.sidebar {  
   padding: 0 !important;
   width: 250px;
   background-color: #2C3E50;
@@ -66,7 +66,7 @@
   background-color: #4F657B;
 }
 
-#page-tab-new {
+.page-tab-new {
   background-color: #2C3E50;
   border-color: #4F657B;
   border-style: solid;
@@ -74,23 +74,23 @@
   padding: 5px 20px 0 20px;
 }
 
-#page-tab-font-new::-webkit-input-placeholder {
+.js-page-tab-font-new::-webkit-input-placeholder {
    color: #4f657B;
 }
 
-#page-tab-font-new:-moz-placeholder { /* Firefox 18- */
+.js-page-tab-font-new:-moz-placeholder { /* Firefox 18- */
    color: #4f657B;  
 }
 
-#page-tab-font-new::-moz-placeholder {  /* Firefox 19+ */
+.js-page-tab-font-new::-moz-placeholder {  /* Firefox 19+ */
    color: #4f657B;  
 }
 
-#page-tab-font-new-ms-input-placeholder {  
+.js-page-tab-font-new-ms-input-placeholder {  
    color: #4f657B;  
 }
 
-#page-tab-font-new {
+.js-page-tab-font-new {
   font-family: "ProximaFont";
   color: #FFF;
   width: 115px;
@@ -117,14 +117,14 @@
   background-color: #3c5065;
 }
 
-#editor-canvas {
+.js-editor-canvas {
   height: 100%;
   position: absolute;
   left: 250px;
   max-width: 80%;
 }
 
-#site-grid {
+.site-grid {
   font-family: "ProximaFont";
   border-style: solid;
   border-width: 1px 1px 1px 1px;
@@ -148,13 +148,9 @@
   color: #5B7389;
 }
 
-#switch {
-  left: 125px;
-  top: -32px;
-}
-
-/* generated */
 .onoffswitch {
+    left: 125px;
+    top: -32px;
     position: relative; width: 55px;
     -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
 }
@@ -432,8 +428,6 @@
   border-width: 3px;
   border-color: #8FC7FF;
 }
-
-
 
 .image-body-row-has-image:hover {
   border-color: #8FC7FF;
