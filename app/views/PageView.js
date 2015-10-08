@@ -6,7 +6,8 @@ App.PageView = Backbone.View.extend({
         "click .js-tab-edit": "editTabName", 
         "mouseenter .js-tab-delete" : "addHoverWithDelay",
         "mouseleave .js-tab-delete" : "removeHoverWithDelay",
-        "keyup .js-tab-title" : "saveTabNameonEnter"
+        "keyup .js-tab-title" : "saveTabNameonEnter",
+        "click .js-welcome" : "showLogin"
     },
 
     initialize: function(){

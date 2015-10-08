@@ -4,28 +4,28 @@
     App.AppView = Backbone.View.extend({
         el: '.wrapper',
         defaults:{
-            autosave: 30000 //30s
+            autosave: 30000
         },
         events: {
             "click .js-plus-sign" : "createPage",
             "keyup .js-page-tab-font-new" : "createPageOnEnter"
-            //"mousedown #title-element" : "draggingTitle"
         },
 
         initialize: function() {
+
             App.User = new Models.User({id: "560d69c5e4b0d5afa45748b1"}); //Default user id
+            window.visitor = App.User;
 
             App.bind("deleteItem", this.deletePage, this);
             App.bind("editor:show", this.showEditor, this);
             App.bind("saveDOM", this.saveDOM, this);
 
             this.tabList = this.$("#templatesList");
-            this.$editor = this.$(".js-editor-canvas");
+            this.editor = this.$(".js-editor-canvas");
             this.titleInput = this.$(".js-page-tab-font-new");
 
             this.initComponents();
             this.collection = new Models.PageCollection([],{userId: App.User.get("id")});
-            //var test = new Models.UserCollection([],{userId: App.User.get("id")});
             this.fetchPages();
 
         },
@@ -36,15 +36,12 @@
             this.$("#text-element").draggable(settings);
             this.$("#title-element").draggable(settings);
         },
-        draggingTitle: function(e){
-            // hide original item while dragging
-        },
         showEditor: function(page) {
             if (page) {
                 var view = new App.EditorView({ model: page });
-                this.$editor.html(view.render().el);
+                this.editor.html(view.render().el);
             } else {
-                this.$editor.html(" ");
+                this.editor.html(" ");
             }
         },
         deletePage: function(model) {
@@ -101,6 +98,11 @@
             if(e.keyCode == 13){    
                 this.createPage();
             }
+        },
+        showLogin: function(){
+            debugger
+            $('#myModal').modal();
+            return false;
         }
     });
 })(jQuery);
