@@ -3,12 +3,12 @@
 
     App.AppView = Backbone.View.extend({
         el: '.wrapper',
-
         defaults:{
             autosave: 30000 //30s
         },
         events: {
-            "click #plus-sign" : "createPage",
+            "click .js-plus-sign" : "createPage",
+            "keyup .js-page-tab-font-new" : "createPageOnEnter"
             //"mousedown #title-element" : "draggingTitle"
         },
 
@@ -97,6 +97,11 @@
                 this.titleInput.val("");
             }
             return false;
+        },
+        createPageOnEnter: function(e){
+            if(e.keyCode == 13){    
+                this.createPage();
+            }
         }
     });
 })(jQuery);

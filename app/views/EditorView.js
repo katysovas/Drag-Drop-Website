@@ -101,29 +101,7 @@ App.EditorView = Backbone.View.extend({
                 var elementDragged = ui.draggable.attr('id');     
                                
                 switch(elementDragged) {
-                    case "image-element":
-                        var countImages = self.$('.image-body-row').length;
-                        var elementId = self.model.get("id") + "_images_" + countImages;
-                        var imageDOM = '<div id=' + elementId +' class="image-body-row"></span><span class="glyphicon glyphicon-remove js-removeElement" aria-hidden="true"></span><span class="elementCorner"></span><input id="image-upload-' + elementId +'" class="hidden js-uploadImage" type="file"><img class="image-placeholder" src="assets/images/placeholder.png"><div class="text-center"><p class="image-placeholder-text">ADD IMAGE</p><span class="plus-sign glyphicon glyphicon-plus image-plus "</span></div></div>';
-                        self.elements.append(imageDOM);
 
-                        App.trigger("saveDOM",self.model,self.elements.html());
-                        break;
-                    case "text-element":
-                        var countText = self.$('.text-row').length;
-                        var elementId = self.model.get("id") + "_text_" + countText;
-                        var textDOM = '<div id=' + elementId + ' class="text-row"></span><span class="glyphicon glyphicon-remove js-removeElement" aria-hidden="true"></span><span class="elementCorner"></span><textarea class="text" placeholder="Enter text here."></textarea></div>';
-                        self.elements.append(textDOM);
-                        
-                        $('#elements').on( 'keyup', 'textarea', function (e){
-                            $(this).css('height', 'auto' );
-                            $(this).height( this.scrollHeight );
-                        });
-                        $('#elements').find('textarea').keyup();
-                        App.trigger("saveDOM",self.model,self.elements.html());
-                        $('#' + elementId).find('textarea').focus();
-
-                        break;
                     case "title-element":
                         var countTitle = self.$('.title-row').length;
                         var elementId = self.model.get("id") + "_title_" + countTitle;
@@ -132,6 +110,29 @@ App.EditorView = Backbone.View.extend({
                         App.trigger("saveDOM",self.model,self.elements.html());
                         $('#' + elementId).find('input').focus();
                         break;
+
+                    case "text-element":
+                        var countText = self.$('.text-row').length;
+                        var elementId = self.model.get("id") + "_text_" + countText;
+                        var textDOM = '<div id=' + elementId + ' class="text-row"></span><span class="glyphicon glyphicon-remove js-removeElement" aria-hidden="true"></span><span class="elementCorner"></span><textarea class="text" placeholder="Enter text here."></textarea></div>';
+                        self.elements.append(textDOM);                        
+                        $('#elements').on( 'keyup', 'textarea', function (e){
+                            $(this).css('height', 'auto' );
+                            $(this).height( this.scrollHeight );
+                        });
+                        $('#elements').find('textarea').keyup();
+                        App.trigger("saveDOM",self.model,self.elements.html());
+                        $('#' + elementId).find('textarea').focus();
+                        break;
+
+                    case "image-element":
+                        var countImages = self.$('.image-body-row').length;
+                        var elementId = self.model.get("id") + "_images_" + countImages;
+                        var imageDOM = '<div id=' + elementId +' class="image-body-row"></span><span class="glyphicon glyphicon-remove js-removeElement" aria-hidden="true"></span><span class="elementCorner"></span><input id="image-upload-' + elementId +'" class="hidden js-uploadImage" type="file"><img class="image-placeholder" src="assets/images/placeholder.png"><div class="text-center"><p class="image-placeholder-text">ADD IMAGE</p><span class="plus-sign glyphicon glyphicon-plus image-plus "</span></div></div>';
+                        self.elements.append(imageDOM);
+                        App.trigger("saveDOM",self.model,self.elements.html());
+                        break;
+                
                     case "nav-element":
                         //TODO
                     default:

@@ -68,7 +68,6 @@ App.PageView = Backbone.View.extend({
             this.editTabName();  
             App.trigger("editor:show",this.model);
         }
-
     },
     render: function() {
         var template = Handlebars.templates['sidebar'];
