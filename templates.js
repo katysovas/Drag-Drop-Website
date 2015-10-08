@@ -12,6 +12,6 @@ templates['sidebar'] = template({"compiler":[7,">= 4.0.0"],"main":function(conta
 
   return "<input class=\"js-tab-title page-tab-fonts\" placeholder=\""
     + container.escapeExpression(((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},{"name":"title","hash":{},"data":data}) : helper)))
-    + "\" maxlength=\"12\" readonly/>\n<span class=\"page-tab-settings-icons js-tab-edit glyphicon glyphicon-pencil\"></span>\n<span class=\"page-tab-settings-icons js-tab-delete glyphicon glyphicon-remove\"></span>\n<div class=\"\"></div>";
+    + "\" maxlength=\"12\" readonly/>\n<span class=\"page-tab-settings-icons js-tab-edit glyphicon glyphicon-pencil\"></span>\n<span class=\"page-tab-settings-icons js-tab-delete glyphicon glyphicon-remove\"></span>";
 },"useData":true});
 })();

@@ -1,5 +1,5 @@
 App.PageView = Backbone.View.extend({
-    className: "page-tab page-tab-title",
+    className: "page-tab",
     events: {
         "click": "activeTemplate",
         "click .js-tab-delete": "removeItem",

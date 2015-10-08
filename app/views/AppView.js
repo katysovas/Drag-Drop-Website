@@ -25,6 +25,7 @@
 
             this.initComponents();
             this.collection = new Models.PageCollection([],{userId: App.User.get("id")});
+            //var test = new Models.UserCollection([],{userId: App.User.get("id")});
             this.fetchPages();
 
         },
