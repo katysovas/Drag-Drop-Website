@@ -10,12 +10,10 @@ Models.User = Backbone.MongoModel.extend({
 
 Models.UserCollection = Backbone.Collection.extend({
     url: function() {
-    	debugger
         return BASE_URL + "/users/?apiKey=" + API_KEY + '&q={"user_id":"'+this.userId+'"}';
     },
     model: Models.User,
     initialize: function(values,options) {
-        debugger
         this.userId = options.userId;
     }
 });

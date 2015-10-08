@@ -70,7 +70,6 @@
         addPage: function (page) {
             var view = new App.PageView({ model: page });
             this.tabList.append(view.render().el);
-            debugger
         },
         saveDOM: function(model,html) {
             model.set("dom",html);

@@ -10,7 +10,7 @@ var rename = require('gulp-rename');
 
 // Lint Task
 gulp.task('lint', function() {
-    return gulp.src('app/*.js')
+    return gulp.src('app/**/*.js')
         .pipe(jshint())
         .pipe(jshint.reporter('default'));
 });
@@ -24,7 +24,7 @@ gulp.task('sass', function() {
 
 // Concatenate & Minify JS
 gulp.task('scripts', function() {
-    return gulp.src('app/*.js')
+    return gulp.src('app/**/*.js')
         .pipe(concat('all.js'))
         .pipe(gulp.dest('dist'))
         .pipe(rename('all.min.js'))

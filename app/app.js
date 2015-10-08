@@ -7,5 +7,5 @@ var Models = Models || {};
 _.extend(App, Backbone.Events);
 
 $(document).ready(function() {
-   new App.AppView();
+   	new App.AppView();
 });
