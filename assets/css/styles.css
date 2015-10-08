@@ -6,6 +6,7 @@
 
 .navbar-default .navbar-nav > li > a{
   color: #FFF;
+  font-family: "ProximaFont";
 }
 
 .navbar-nav {
@@ -14,14 +15,9 @@
   float:right;
 }
 
-.js-autosave{
-  color: #B9B9B9;
-}
-
-.js-autosave:hover, 
-.js-login:hover, 
-.active-save{
-  color: #FFF !important;
+.modal-content{
+    width:70%;
+    margin:0 auto;
 }
 
 .logo {
