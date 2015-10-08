@@ -1,13 +1,14 @@
 App.EditorView = Backbone.View.extend({
 
     events: {
-        "change textarea":"saveTextareaText",
-        "click .js-removeElement":"removeElement",
-        "change input":"saveTitleText",
-        "click .image-placeholder":"addImage",
-        "mouseover .js-removeElement": "addBorder",
-        "mouseout .js-removeElement": "removeBorder",
-        "keyup .title" : "saveTitleOnEnter"        
+        "change textarea" : "saveTextareaText",
+        "click .js-removeElement" : "removeElement",
+        "change input" : "saveTitleText",
+        "click .image-placeholder" : "addImage",
+        "mouseover .js-removeElement" : "addBorder",
+        "mouseout .js-removeElement" : "removeBorder",
+        "keyup .title" : "saveTitleOnEnter",
+        "focus .js-text-area" : "expandTextArea"   
     },
 
     saveTextareaText: function(e) {
@@ -77,6 +78,16 @@ App.EditorView = Backbone.View.extend({
         targetParent.removeClass('red-border');
     },
 
+    expandTextArea: function(){
+
+        $('#elements').on( 'keyup', 'textarea', function (e){
+            $(this).css('height', 'auto' );
+            $(this).height( this.scrollHeight );
+        });
+        $('#elements').find('textarea').keyup();
+
+    },
+
     render: function() {
         var self = this;
         var template = Handlebars.templates['editor'];
@@ -88,6 +99,8 @@ App.EditorView = Backbone.View.extend({
         if (this.model.has("dom")) {
             this.elements.html(this.model.get("dom"));
         }
+
+        this.expandTextArea();
 
         this.elements.sortable({
             cancel: "textarea,input",
@@ -114,13 +127,10 @@ App.EditorView = Backbone.View.extend({
                     case "text-element":
                         var countText = self.$('.text-row').length;
                         var elementId = self.model.get("id") + "_text_" + countText;
-                        var textDOM = '<div id=' + elementId + ' class="text-row"></span><span class="glyphicon glyphicon-remove js-removeElement" aria-hidden="true"></span><span class="elementCorner"></span><textarea class="text" placeholder="Enter text here."></textarea></div>';
+                        var textDOM = '<div id=' + elementId + ' class="text-row"></span><span class="glyphicon glyphicon-remove js-removeElement" aria-hidden="true"></span><span class="elementCorner"></span><textarea class="js-text-area" placeholder="Enter text here."></textarea></div>';
                         self.elements.append(textDOM);                        
-                        $('#elements').on( 'keyup', 'textarea', function (e){
-                            $(this).css('height', 'auto' );
-                            $(this).height( this.scrollHeight );
-                        });
-                        $('#elements').find('textarea').keyup();
+                        
+                        self.expandTextArea();
                         App.trigger("saveDOM",self.model,self.elements.html());
                         $('#' + elementId).find('textarea').focus();
                         break;

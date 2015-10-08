@@ -370,7 +370,7 @@
    border: 3px solid transparent;
 }
 
-.text {
+.js-text-area {
   resize: vertical;
   width: 100%;
   border: none;
@@ -378,7 +378,7 @@
   overflow-y: hidden;
 }
 
-.text:focus{
+.js-text-area:focus{
   outline:0;
 }
 
@@ -410,18 +410,28 @@
   float: right;
 }
 
-.text-row:hover .js-removeElement,
+
 .image-body-row:hover .js-removeElement,
 .title-row:hover .js-removeElement {
-    display: inline-block !important;
+    display: inline;
     padding: 5px;
     color: #8FC7FF;
     cursor: pointer;
 }
 
+.text-row:hover .js-removeElement{
+    display: inline;
+    padding: 5px;
+    color: #8FC7FF;
+    cursor: pointer;
+    z-index: 50;
+    position: absolute;
+    right: 0px;
+}
+
 .image-body-row:hover .js-removeElement, 
 .text-row:hover .js-removeElement{
-    color: #FFF !important;
+    color: #FFF;
 }
 
 .image-body-row:hover{
@@ -434,17 +444,29 @@
 }
 
 .image-body-row-has-image{
-  height: auto !important;
+  height: auto;
   margin: 50px auto;
   background-color: #FFF;
   border: 3px solid transparent;
 }
 
-.image-body-row:hover .elementCorner, .text-row:hover .elementCorner{
+.image-body-row:hover .elementCorner{
     width: 0;
     height: 0;
     float: right;
     margin-right: -24px;
+    border-style: solid;
+    border-width: 0 40px 40px 0;
+    border-color: transparent #8FC7FF transparent transparent;
+}
+
+.text-row:hover .elementCorner{
+    width: 0;
+    height: 0;
+    display: inline;
+    right: 0px;
+    z-index: 40;
+    position: absolute;
     border-style: solid;
     border-width: 0 40px 40px 0;
     border-color: transparent #8FC7FF transparent transparent;
