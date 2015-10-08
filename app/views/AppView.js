@@ -19,9 +19,7 @@
             App.bind("editor:show", this.showEditor, this);
             App.bind("saveDOM", this.saveDOM, this);
 
-            App.bind("saveOnExit", this.saveOnExit, this);
-
-            this.$list = this.$("#templatesList");
+            this.tabList = this.$("#templatesList");
             this.$editor = this.$("#editor-canvas");
             this.titleInput = this.$("#page-tab-font-new");
 
@@ -65,13 +63,13 @@
             }});
         },
         renderPages: function() {
-            this.$list.html(' ');
+            this.tabList.html(' ');
             this.collection.each(this.addPage, this);
         },
         addPage: function (page) {
             var view = new App.PageView({ model: page });
-            this.$list.append(view.render().el);
-
+            this.tabList.append(view.render().el);
+            debugger
         },
         saveDOM: function(model,html) {
             model.set("dom",html);
@@ -85,12 +83,10 @@
             }, this.defaults.autosave);
 
         },
-        createPage: function() {
-            
+        createPage: function() {            
             var self = this;
             if (this.titleInput.val().length > 0){
-                var newPage = new Models.Page({title: this.titleInput.val()});
-                
+                var newPage = new Models.Page({title: this.titleInput.val()});                
                 newPage.set("user_id",App.User.get("id"));
                 //self.collection.add(newPage);
                 newPage.save(null,{success: function(){

@@ -81,7 +81,6 @@ App.EditorView = Backbone.View.extend({
         var self = this;
         var template = Handlebars.templates['editor'];
         var html = template(this.model.toJSON());
-        
         this.$el.html(html);
 
         this.$el.css("height","100%");
@@ -140,7 +139,6 @@ App.EditorView = Backbone.View.extend({
                 }                
             }
         });
-
         return this;
     }
 });

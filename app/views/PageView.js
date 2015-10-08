@@ -22,7 +22,6 @@ App.PageView = Backbone.View.extend({
     activeTemplate: function() {
         this.$el.parent().children().removeClass("active");
         this.$el.addClass("active");
-        //App.trigger("saveOnExit",this.model,localStorage.getItem('dom'));
         App.trigger("editor:show",this.model);
          
     },

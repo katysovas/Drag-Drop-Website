@@ -15,6 +15,7 @@ Models.PageCollection = Backbone.Collection.extend({
     },
     model: Models.Page,
     initialize: function(values,options) {
+        debugger
         this.userId = options.userId;
     }
 });
