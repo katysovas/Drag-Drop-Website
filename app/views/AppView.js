@@ -40,10 +40,6 @@
                 self.showLogin();
                 return false;
             });
-            $('.js-logout').on('click', function(){
-                self.removeCookie();
-                return false;
-            });
 
             if (window.visitor.isRegistered)
                 $('.js-login').html('Hi, ' + window.visitor.name);
@@ -131,11 +127,6 @@
                 "email" : profile.getEmail()
             }
             $.cookie("Weebly", visitor);
-            window.location.reload();
-        },
-        removeCookie: function(){
-            debugger
-            $.removeCookie('Weebly', { path: '/' });
             window.location.reload();
         }
     });
