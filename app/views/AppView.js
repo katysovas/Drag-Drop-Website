@@ -5,7 +5,7 @@
         el: '.wrapper',
         defaults:{
             autosave: 40000, 
-            enableLocaleStorage: true
+            enableLocaleStorage: false
         },
         events: {
             "click .js-plus-sign" : "createPage",
