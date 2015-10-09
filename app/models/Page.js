@@ -5,7 +5,8 @@ Models.Page = Backbone.MongoModel.extend({
         var parsed_url = original_url + ( original_url.charAt( original_url.length - 1 ) == '/' ? '' : '/' );
         parsed_url += "?apiKey="+API_KEY;
         return parsed_url;
-    }
+    } 
+    //localStorage: new Backbone.LocalStorage("Weebly")
 });
 
 Models.PageCollection = Backbone.Collection.extend({
@@ -15,5 +16,6 @@ Models.PageCollection = Backbone.Collection.extend({
     model: Models.Page,
     initialize: function(values,options) {
         this.userId = options.userId;
-    }
+    } 
+    //localStorage: new Backbone.LocalStorage("Weebly")
 });

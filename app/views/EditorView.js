@@ -120,7 +120,6 @@ App.EditorView = Backbone.View.extend({
                         var elementId = self.model.get("id") + "_title_" + countTitle;
                         var titleDOM = '<div id=' + elementId + ' class="title-row"></span><span class="glyphicon glyphicon-remove js-removeElement" aria-hidden="true"></span><input class="title" style="border: none;" placeholder="Add Title Here"></div>';
                         self.elements.append(titleDOM);
-                        App.trigger("saveDOM",self.model,self.elements.html());
                         $('#' + elementId).find('input').focus();
                         break;
 
@@ -131,7 +130,6 @@ App.EditorView = Backbone.View.extend({
                         self.elements.append(textDOM);                        
                         
                         self.expandTextArea();
-                        App.trigger("saveDOM",self.model,self.elements.html());
                         $('#' + elementId).find('textarea').focus();
                         break;
 
@@ -140,14 +138,19 @@ App.EditorView = Backbone.View.extend({
                         var elementId = self.model.get("id") + "_images_" + countImages;
                         var imageDOM = '<div id=' + elementId +' class="image-body-row"></span><span class="glyphicon glyphicon-remove js-removeElement" aria-hidden="true"></span><span class="elementCorner"></span><input id="image-upload-' + elementId +'" class="hidden js-uploadImage" type="file"><img class="image-placeholder" src="assets/images/placeholder.png"><div class="text-center"><p class="image-placeholder-text">ADD IMAGE</p><span class="plus-sign glyphicon glyphicon-plus image-plus "</span></div></div>';
                         self.elements.append(imageDOM);
-                        App.trigger("saveDOM",self.model,self.elements.html());
                         break;
                 
                     case "nav-element":
+                        var countNav = self.$('.nav-row').length;
+                        var elementId = self.model.get("id") + "_nav_" + countNav;
+                        var navDOM = '<div id=' + elementId + ' class="nav-row"></span><span class="glyphicon glyphicon-remove js-removeElement" aria-hidden="true"></span><input class="nav" style="border: none;" placeholder="Add URL Here"></div>';
+                        self.elements.append(navDOM);
                         //TODO
                     default:
                         //do nothing
-                }                
+                } 
+
+                App.trigger("saveDOM",self.model,self.elements.html());            
             }
         });
         return this;

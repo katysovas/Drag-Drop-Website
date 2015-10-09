@@ -4,7 +4,8 @@
     App.AppView = Backbone.View.extend({
         el: '.wrapper',
         defaults:{
-            autosave: 30000
+            autosave: 40000, 
+            enableLocaleStorage: false
         },
         events: {
             "click .js-plus-sign" : "createPage",
@@ -13,7 +14,7 @@
 
         initialize: function() {
 
-            App.User = new Models.User({id: "560d69c5e4b0d5afa45748b1"}); //Default user id
+            App.User = new Models.User({id: "560d69c5e4b0d5afa45748b1"}); //for testing
 
             App.bind("deleteItem", this.deletePage, this);
             App.bind("editor:show", this.showEditor, this);
@@ -43,7 +44,7 @@
                 self.removeCookie();
                 return false;
             });
-            debugger
+
             if (window.visitor.isRegistered)
                 $('.js-login').html('Hi, ' + window.visitor.name);
 
@@ -51,6 +52,7 @@
             this.$("#image-element").draggable(settings);
             this.$("#text-element").draggable(settings);
             this.$("#title-element").draggable(settings);
+            this.$("#nav-element").draggable(settings);
         },
         showEditor: function(page) {
             if (page) {
@@ -73,7 +75,8 @@
             var self = this;
             this.collection.fetch({success: function(){                
                 self.renderPages();
-                //self.collection.localStorage = new Backbone.LocalStorage("Weebly");
+                if (self.defaults.enableLocaleStorage)
+                    self.collection.localStorage = new Backbone.LocalStorage("Weebly");
             }});
         },
         renderPages: function() {
@@ -101,11 +104,10 @@
             if (this.titleInput.val().length > 0){
                 var newPage = new Models.Page({title: this.titleInput.val()});                
                 newPage.set("user_id",App.User.get("id"));
-                //self.collection.add(newPage);
+                self.collection.add(newPage);
                 newPage.save(null,{success: function(){
                     self.fetchPages();
                 }});
-
                 this.titleInput.val("");
             }
             return false;
@@ -132,6 +134,7 @@
             window.location.reload();
         },
         removeCookie: function(){
+            debugger
             $.removeCookie('Weebly', { path: '/' });
             window.location.reload();
         }
