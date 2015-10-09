@@ -9,7 +9,7 @@ App.EditorView = Backbone.View.extend({
         "mouseout .js-removeElement" : "removeBorder",
         "keyup .title" : "saveTitleOnEnter",
         "focus .js-text-area" : "expandTextArea", 
-        "blur .nav" : "makeURL" 
+        "blur .nav" : "makeURL"
     },
 
     saveTextareaText: function(e) {
@@ -37,7 +37,6 @@ App.EditorView = Backbone.View.extend({
     },
 
     makeURL: function(e){
-
         var url = $(e.target).val();
         var aTag = $('<a>',{
                     text: url,
@@ -46,11 +45,9 @@ App.EditorView = Backbone.View.extend({
                     href: 'http://' + url,
                     target: "_blank"
                 });
-
         $(e.target).hide();
         $(e.target).parent().append(aTag);
         App.trigger("saveDOM",this.model,this.elements.html());
-        debugger
     },
 
     addImage: function(e){
