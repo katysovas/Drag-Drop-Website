@@ -1,5 +1,5 @@
 # WeeblyProject
-Trial Weebly Project:
+##Trial Weebly Project:
 
 - Monday:  CSS/DOM
 - Tuesday: Backbone Models & Views & MongoDB
@@ -8,7 +8,7 @@ Trial Weebly Project:
 - Friday: Cleaning code, QA & Beer
 
 
-All the things:
+##All the things:
 
 - Bootstrap 3.3.5
 - jQuery 2.1.4
@@ -20,23 +20,23 @@ All the things:
 - MongoDB (mongolabs)
 
 
-The Good Things:
+##The Good Things:
 
 - The templates are pre-compiled and js files are minimized and built for CDN cashing
 - Using cache to save some DB calls (partially works)
 
-The Bad Things:
+##The Bad Things:
 
 - should use AWS or GridFS for storing images instead of data uri base64
 - Site Grid doesn't work
 
 
-API Calls:
+##API Calls:
 - Users https://api.mongolab.com/api/1/databases/pagedb/collections/users/?apiKey=
 - Pages https://api.mongolab.com/api/1/databases/pagedb/collections/pages/?apiKey=
 
 
-MongoDB Sharding strategy:
+##MongoDB Sharding strategy:
 
 3 shards to begin: using pagedb database with collection pages. The structure of the documents in pages is given below:
 ```
