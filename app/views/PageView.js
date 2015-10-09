@@ -21,19 +21,17 @@ App.PageView = Backbone.View.extend({
     activeTemplate: function() {
         this.$el.parent().children().removeClass("active");
         this.$el.addClass("active");
-        App.trigger("editor:show",this.model);
-         
+        App.trigger("editor:show",this.model);         
     },
 
     removeItem: function() {
         App.trigger("deleteItem",this.model, this.$el.hasClass("active"));
     },
     addHoverWithDelay: function(e){
-        var target = $(e.target);
         if (!window.timeoutId) {
             window.timeoutId = window.setTimeout(function() {
                 window.timeoutId = null;
-                target.parent().addClass('red-tab');
+                $(e.target).parent().addClass('red-tab');
            }, 500);
         }        
     },
@@ -42,10 +40,8 @@ App.PageView = Backbone.View.extend({
             window.clearTimeout(window.timeoutId);
             window.timeoutId = null;
         }
-        else {
-            var target = $(e.target);
-            target.parent().removeClass('red-tab');
-        }
+        else            
+            $(e.target).parent().removeClass('red-tab');
     },
     
     editTabName: function() {

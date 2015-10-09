@@ -4,7 +4,8 @@ Models.User = Backbone.MongoModel.extend({
 
     defaults: {
         isRegistered: false, 
-        name: ''
+        name: '',
+        email: ''
     },
 
     urlRoot: BASE_URL + '/users/',

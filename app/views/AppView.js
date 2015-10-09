@@ -27,7 +27,8 @@
 
             this.initComponents();
             this.collection = new Models.PageCollection([],{userId: App.User.get("id")});
-            this.fetchPages();
+            if (window.visitor.isRegistered)
+                this.fetchPages();
 
         },
         initComponents: function() {
@@ -38,7 +39,11 @@
                 self.showLogin();
                 return false;
             });
-
+            $('.js-logout').on('click', function(){
+                self.removeCookie();
+                return false;
+            });
+            debugger
             if (window.visitor.isRegistered)
                 $('.js-login').html('Hi, ' + window.visitor.name);
 
@@ -120,9 +125,14 @@
             var visitor = {
                 'name' : profile.getName(),
                 'isRegistered' : true, 
-                "id" : '560d69c5e4b0d5afa45748b1'
+                "id" : '560d69c5e4b0d5afa45748b1',
+                "email" : profile.getEmail()
             }
             $.cookie("Weebly", visitor);
+            window.location.reload();
+        },
+        removeCookie: function(){
+            $.removeCookie('Weebly', { path: '/' });
             window.location.reload();
         }
     });
