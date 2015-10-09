@@ -8,7 +8,8 @@ App.EditorView = Backbone.View.extend({
         "mouseover .js-removeElement" : "addBorder",
         "mouseout .js-removeElement" : "removeBorder",
         "keyup .title" : "saveTitleOnEnter",
-        "focus .js-text-area" : "expandTextArea"   
+        "focus .js-text-area" : "expandTextArea", 
+        "blur .nav" : "makeURL" 
     },
 
     saveTextareaText: function(e) {
@@ -16,6 +17,7 @@ App.EditorView = Backbone.View.extend({
         target.html(target.val());
         App.trigger("saveDOM",this.model,this.elements.html());
     },
+
     saveTitleText: function() {
         var target = $(event.target);
         target.attr("value",target.val());
@@ -32,6 +34,23 @@ App.EditorView = Backbone.View.extend({
     removeElement: function(e){
         $(e.target).parent().remove();
         App.trigger("saveDOM",this.model,this.elements.html());
+    },
+
+    makeURL: function(e){
+
+        var url = $(e.target).val();
+        var aTag = $('<a>',{
+                    text: url,
+                    class: 'nav-url',
+                    title: url,
+                    href: 'http://' + url,
+                    target: "_blank"
+                });
+
+        $(e.target).hide();
+        $(e.target).parent().append(aTag);
+        App.trigger("saveDOM",this.model,this.elements.html());
+        debugger
     },
 
     addImage: function(e){
@@ -145,7 +164,7 @@ App.EditorView = Backbone.View.extend({
                         var elementId = self.model.get("id") + "_nav_" + countNav;
                         var navDOM = '<div id=' + elementId + ' class="nav-row"></span><span class="glyphicon glyphicon-remove js-removeElement" aria-hidden="true"></span><input class="nav" style="border: none;" placeholder="Add URL Here"></div>';
                         self.elements.append(navDOM);
-                        //TODO
+                        $('#' + elementId).find('input').focus();
                     default:
                         //do nothing
                 } 

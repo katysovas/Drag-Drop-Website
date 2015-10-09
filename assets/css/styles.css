@@ -353,13 +353,13 @@
   font-size: 10px;
 }
 
-.title-row {
+.title-row, .nav-row{
   width: 90%;
   margin: 40px auto;
   position: relative;
 }
 
-.title {
+.title, .nav-row .nav, .nav-url {
   font-family: 'ProximaFont';
   font-size: 2em;
   color: #4f657b;
@@ -396,7 +396,7 @@
   border-style: dashed;
 }
 
-.title-row .js-removeElement {
+.title-row .js-removeElement, .nav-row .js-removeElement{
   position: absolute;
   display:none;
   float: right;
@@ -415,7 +415,8 @@
 
 
 .image-body-row:hover .js-removeElement,
-.title-row:hover .js-removeElement {
+.title-row:hover .js-removeElement,
+.nav-row:hover .js-removeElement{
     display: inline;
     padding: 5px;
     color: #8FC7FF;
