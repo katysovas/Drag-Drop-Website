@@ -5,7 +5,7 @@
         el: '.wrapper',
         defaults:{
             autosave: 40000, 
-            enableLocaleStorage: false
+            enableLocaleStorage: true
         },
         events: {
             "click .js-plus-sign" : "createPage",
@@ -90,10 +90,12 @@
 
             $('.js-autosave').addClass('active-save');
 
-            var intervalID = setInterval(function(){
-                console.log('auto saving');
-                model.save();
-            }, this.defaults.autosave);
+            if (!this.defaults.enableLocaleStorage){
+                var intervalID = setInterval(function(){
+                    console.log('auto saving');
+                    model.save();
+                }, this.defaults.autosave);
+            }
 
         },
         createPage: function() {            
