@@ -5,7 +5,7 @@
         el: '.wrapper',
         defaults:{
             autosave: 40000, 
-            enableLocaleStorage: false
+            enableLocaleStorage: true
         },
         events: {
             "click .js-plus-sign" : "createPage",
@@ -69,10 +69,11 @@
         },
         fetchPages: function() {
             var self = this;
-            this.collection.fetch({success: function(){                
-                self.renderPages();
-                if (self.defaults.enableLocaleStorage)
+
+            if (self.defaults.enableLocaleStorage)
                     self.collection.localStorage = new Backbone.LocalStorage("Weebly");
+            this.collection.fetch({success: function(){                
+                self.renderPages();                
             }});
         },
         renderPages: function() {
@@ -98,13 +99,15 @@
         createPage: function() {            
             var self = this;
             if (this.titleInput.val().length > 0){
-                var newPage = new Models.Page({title: this.titleInput.val()});                
+                var newPage = new Models.Page({title: this.titleInput.val()});
                 newPage.set("user_id",App.User.get("id"));
                 self.collection.add(newPage);
                 newPage.save(null,{success: function(){
                     self.fetchPages();
                 }});
                 this.titleInput.val("");
+                debugger
+                newPage.sync();
             }
             return false;
         },
