@@ -29,3 +29,8 @@ The Bad Things:
 
 - should use AWS or GridFS for storing images instead of data uri base64
 - Site Grid doesn't work
+
+
+API Calls:
+- Users https://api.mongolab.com/api/1/databases/pagedb/collections/users/?apiKey=
+- Pages https://api.mongolab.com/api/1/databases/pagedb/collections/pages/?apiKey=
