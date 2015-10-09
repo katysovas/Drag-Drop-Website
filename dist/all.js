@@ -10,6 +10,13 @@ $(document).ready(function() {
    	new App.AppView();
 });
 
+function onSignIn(googleUser) {
+	if(!window.visitor.isRegistered){
+		var profile = googleUser.getBasicProfile();
+		if (profile)
+			App.trigger('updateCookie', profile);
+    }
+};
 // backbone-mongodb 0.1.0
 //
 // (c) 2013 Vadim Mirgorod
@@ -66,22 +73,6 @@ $(document).ready(function() {
 
 }).call(this, Backbone);
 
-this["App"] = this["App"] || {};
-this["App"]["templates"] = this["App"]["templates"] || {};
-this["App"]["templates"]["editor"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-    var helper;
-
-  return "<div class=\"row page-nav-row\">      \n	<div class=\"text-center page-tab-nav page-tab-nav-active\">\n	"
-    + this.escapeExpression(((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0,{"name":"title","hash":{},"data":data}) : helper)))
-    + "\n	</div>\n</div>\n<div id=\"elements\"></div>\n";
-},"useData":true});
-this["App"]["templates"]["sidebar"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-    var helper;
-
-  return "<input class=\"js-tab-title page-tab-fonts\" placeholder=\""
-    + this.escapeExpression(((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0,{"name":"title","hash":{},"data":data}) : helper)))
-    + "\" maxlength=\"12\" readonly/>\n<span class=\"page-tab-settings-icons js-tab-edit glyphicon glyphicon-pencil\"></span>\n<span class=\"page-tab-settings-icons js-tab-delete glyphicon glyphicon-remove\"></span>";
-},"useData":true});
 (function() {
   var template = Handlebars.template, templates = Handlebars.templates = Handlebars.templates || {};
 templates['editor'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
@@ -96,7 +87,7 @@ templates['sidebar'] = template({"compiler":[7,">= 4.0.0"],"main":function(conta
 
   return "<input class=\"js-tab-title page-tab-fonts\" placeholder=\""
     + container.escapeExpression(((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},{"name":"title","hash":{},"data":data}) : helper)))
-    + "\" maxlength=\"12\" readonly/>\n<span class=\"page-tab-settings-icons js-tab-edit glyphicon glyphicon-pencil\"></span>\n<span class=\"page-tab-settings-icons js-tab-delete glyphicon glyphicon-remove\"></span>";
+    + "\" maxlength=\"14\" readonly/>\n<span class=\"page-tab-settings-icons js-tab-edit glyphicon glyphicon-pencil\"></span>\n<span class=\"page-tab-settings-icons js-tab-delete glyphicon glyphicon-remove\"></span>";
 },"useData":true});
 })();
 
@@ -107,7 +98,8 @@ Models.Page = Backbone.MongoModel.extend({
         var parsed_url = original_url + ( original_url.charAt( original_url.length - 1 ) == '/' ? '' : '/' );
         parsed_url += "?apiKey="+API_KEY;
         return parsed_url;
-    }
+    } 
+    //localStorage: new Backbone.LocalStorage("Weebly")
 });
 
 Models.PageCollection = Backbone.Collection.extend({
@@ -117,21 +109,50 @@ Models.PageCollection = Backbone.Collection.extend({
     model: Models.Page,
     initialize: function(values,options) {
         this.userId = options.userId;
-    }
+    } 
+    //localStorage: new Backbone.LocalStorage("Weebly")
 });
 Models.User = Backbone.MongoModel.extend({
-    urlRoot: BASE_URL + "/users/",
+
+    idAttribute: '_ID',
+
+    defaults: {
+        isRegistered: false, 
+        name: '',
+        email: ''
+    },
+
+    urlRoot: BASE_URL + '/users/',
     url: function() {
         var original_url = Backbone.Model.prototype.url.call( this );
         var parsed_url = original_url + ( original_url.charAt( original_url.length - 1 ) == '/' ? '' : '/' );
-        parsed_url += "?apiKey="+API_KEY;
+        parsed_url += '?apiKey=' + API_KEY;
         return parsed_url;
+    }, 
+
+    initialize: function(){
+        window.visitor = {
+            isRegistered : this.defaults.isRegistered,
+            name : this.defaults.name
+        };
+        this.readCookie();
+    },
+
+    readCookie: function(){
+        $.cookie.json = true;
+        var currentUser = $.cookie('Weebly');
+        if (typeof currentUser != 'undefined' && currentUser.isRegistered){
+            this.defaults.name = currentUser.name;
+            this.defaults.isRegistered = true;
+            window.visitor = currentUser;
+        }
     }
+
 });
 
 Models.UserCollection = Backbone.Collection.extend({
     url: function() {
-        return BASE_URL + "/users/?apiKey=" + API_KEY + '&q={"user_id":"'+this.userId+'"}';
+        return BASE_URL + '/users/?apiKey=' + API_KEY + '&q={"user_id":"'+this.userId+'"}';
     },
     model: Models.User,
     initialize: function(values,options) {
@@ -144,47 +165,58 @@ Models.UserCollection = Backbone.Collection.extend({
     App.AppView = Backbone.View.extend({
         el: '.wrapper',
         defaults:{
-            autosave: 30000 //30s
+            autosave: 40000, 
+            enableLocaleStorage: false
         },
         events: {
             "click .js-plus-sign" : "createPage",
             "keyup .js-page-tab-font-new" : "createPageOnEnter"
-            //"mousedown #title-element" : "draggingTitle"
         },
 
         initialize: function() {
-            App.User = new Models.User({id: "560d69c5e4b0d5afa45748b1"}); //Default user id
+
+            App.User = new Models.User({id: "560d69c5e4b0d5afa45748b1"}); //for testing
 
             App.bind("deleteItem", this.deletePage, this);
             App.bind("editor:show", this.showEditor, this);
             App.bind("saveDOM", this.saveDOM, this);
+            App.bind("showLogin", this.showLogin, this);
+            App.bind("updateCookie", this.updateCookie, this);
 
             this.tabList = this.$("#templatesList");
-            this.$editor = this.$(".js-editor-canvas");
+            this.editor = this.$(".js-editor-canvas");
             this.titleInput = this.$(".js-page-tab-font-new");
 
             this.initComponents();
             this.collection = new Models.PageCollection([],{userId: App.User.get("id")});
-            //var test = new Models.UserCollection([],{userId: App.User.get("id")});
-            this.fetchPages();
+            if (window.visitor.isRegistered)
+                this.fetchPages();
 
         },
         initComponents: function() {
-            var settings =  {appendTo: "body", helper: "clone"};
 
+            var self = this;
+
+            $('.js-login').on('click', function(){
+                self.showLogin();
+                return false;
+            });
+
+            if (window.visitor.isRegistered)
+                $('.js-login').html('Hi, ' + window.visitor.name);
+
+            var settings =  {appendTo: "body", helper: "clone"};
             this.$("#image-element").draggable(settings);
             this.$("#text-element").draggable(settings);
             this.$("#title-element").draggable(settings);
-        },
-        draggingTitle: function(e){
-            // hide original item while dragging
+            this.$("#nav-element").draggable(settings);
         },
         showEditor: function(page) {
             if (page) {
                 var view = new App.EditorView({ model: page });
-                this.$editor.html(view.render().el);
+                this.editor.html(view.render().el);
             } else {
-                this.$editor.html(" ");
+                this.editor.html(" ");
             }
         },
         deletePage: function(model) {
@@ -198,9 +230,11 @@ Models.UserCollection = Backbone.Collection.extend({
         },
         fetchPages: function() {
             var self = this;
+
+            if (self.defaults.enableLocaleStorage)
+                    self.collection.localStorage = new Backbone.LocalStorage("Weebly");
             this.collection.fetch({success: function(){                
-                self.renderPages();
-                //self.collection.localStorage = new Backbone.LocalStorage("Weebly");
+                self.renderPages();                
             }});
         },
         renderPages: function() {
@@ -217,22 +251,23 @@ Models.UserCollection = Backbone.Collection.extend({
 
             $('.js-autosave').addClass('active-save');
 
-            var intervalID = setInterval(function(){
-                console.log('auto saving');
-                model.save();
-            }, this.defaults.autosave);
+            if (!this.defaults.enableLocaleStorage){
+                var intervalID = setInterval(function(){
+                    console.log('auto saving');
+                    model.save();
+                }, this.defaults.autosave);
+            }
 
         },
         createPage: function() {            
             var self = this;
             if (this.titleInput.val().length > 0){
-                var newPage = new Models.Page({title: this.titleInput.val()});                
+                var newPage = new Models.Page({title: this.titleInput.val()});
                 newPage.set("user_id",App.User.get("id"));
-                //self.collection.add(newPage);
+                self.collection.add(newPage);
                 newPage.save(null,{success: function(){
                     self.fetchPages();
                 }});
-
                 this.titleInput.val("");
             }
             return false;
@@ -241,6 +276,22 @@ Models.UserCollection = Backbone.Collection.extend({
             if(e.keyCode == 13){    
                 this.createPage();
             }
+        },
+        showLogin: function(){
+            if (!window.visitor.isRegistered)
+                $('#myModal').modal();
+            return false;
+        },
+        updateCookie: function(profile){
+            $.cookie.json = true;        
+            var visitor = {
+                'name' : profile.getName(),
+                'isRegistered' : true, 
+                "id" : '560d69c5e4b0d5afa45748b1',
+                "email" : profile.getEmail()
+            }
+            $.cookie("Weebly", visitor);
+            window.location.reload();
         }
     });
 })(jQuery);
@@ -254,7 +305,8 @@ App.EditorView = Backbone.View.extend({
         "mouseover .js-removeElement" : "addBorder",
         "mouseout .js-removeElement" : "removeBorder",
         "keyup .title" : "saveTitleOnEnter",
-        "focus .js-text-area" : "expandTextArea"   
+        "focus .js-text-area" : "expandTextArea", 
+        "blur .nav" : "makeURL"
     },
 
     saveTextareaText: function(e) {
@@ -262,6 +314,7 @@ App.EditorView = Backbone.View.extend({
         target.html(target.val());
         App.trigger("saveDOM",this.model,this.elements.html());
     },
+
     saveTitleText: function() {
         var target = $(event.target);
         target.attr("value",target.val());
@@ -277,6 +330,20 @@ App.EditorView = Backbone.View.extend({
 
     removeElement: function(e){
         $(e.target).parent().remove();
+        App.trigger("saveDOM",this.model,this.elements.html());
+    },
+
+    makeURL: function(e){
+        var url = $(e.target).val();
+        var aTag = $('<a>',{
+                    text: url,
+                    class: 'nav-url',
+                    title: url,
+                    href: 'http://' + url,
+                    target: "_blank"
+                });
+        $(e.target).hide();
+        $(e.target).parent().append(aTag);
         App.trigger("saveDOM",this.model,this.elements.html());
     },
 
@@ -366,7 +433,6 @@ App.EditorView = Backbone.View.extend({
                         var elementId = self.model.get("id") + "_title_" + countTitle;
                         var titleDOM = '<div id=' + elementId + ' class="title-row"></span><span class="glyphicon glyphicon-remove js-removeElement" aria-hidden="true"></span><input class="title" style="border: none;" placeholder="Add Title Here"></div>';
                         self.elements.append(titleDOM);
-                        App.trigger("saveDOM",self.model,self.elements.html());
                         $('#' + elementId).find('input').focus();
                         break;
 
@@ -377,7 +443,6 @@ App.EditorView = Backbone.View.extend({
                         self.elements.append(textDOM);                        
                         
                         self.expandTextArea();
-                        App.trigger("saveDOM",self.model,self.elements.html());
                         $('#' + elementId).find('textarea').focus();
                         break;
 
@@ -386,14 +451,19 @@ App.EditorView = Backbone.View.extend({
                         var elementId = self.model.get("id") + "_images_" + countImages;
                         var imageDOM = '<div id=' + elementId +' class="image-body-row"></span><span class="glyphicon glyphicon-remove js-removeElement" aria-hidden="true"></span><span class="elementCorner"></span><input id="image-upload-' + elementId +'" class="hidden js-uploadImage" type="file"><img class="image-placeholder" src="assets/images/placeholder.png"><div class="text-center"><p class="image-placeholder-text">ADD IMAGE</p><span class="plus-sign glyphicon glyphicon-plus image-plus "</span></div></div>';
                         self.elements.append(imageDOM);
-                        App.trigger("saveDOM",self.model,self.elements.html());
                         break;
                 
                     case "nav-element":
-                        //TODO
+                        var countNav = self.$('.nav-row').length;
+                        var elementId = self.model.get("id") + "_nav_" + countNav;
+                        var navDOM = '<div id=' + elementId + ' class="nav-row"></span><span class="glyphicon glyphicon-remove js-removeElement" aria-hidden="true"></span><input class="nav" style="border: none;" placeholder="Add URL Here"></div>';
+                        self.elements.append(navDOM);
+                        $('#' + elementId).find('input').focus();
                     default:
                         //do nothing
-                }                
+                } 
+
+                App.trigger("saveDOM",self.model,self.elements.html());            
             }
         });
         return this;
@@ -413,7 +483,6 @@ App.PageView = Backbone.View.extend({
     initialize: function(){
 
         var self = this;
-
         $('#templatesList').children().removeClass('active');
         this.$el.addClass('active');
         App.trigger("editor:show",self.model);
@@ -423,19 +492,17 @@ App.PageView = Backbone.View.extend({
     activeTemplate: function() {
         this.$el.parent().children().removeClass("active");
         this.$el.addClass("active");
-        App.trigger("editor:show",this.model);
-         
+        App.trigger("editor:show",this.model);         
     },
 
     removeItem: function() {
         App.trigger("deleteItem",this.model, this.$el.hasClass("active"));
     },
     addHoverWithDelay: function(e){
-        var target = $(e.target);
         if (!window.timeoutId) {
             window.timeoutId = window.setTimeout(function() {
                 window.timeoutId = null;
-                target.parent().addClass('red-tab');
+                $(e.target).parent().addClass('red-tab');
            }, 500);
         }        
     },
@@ -444,10 +511,8 @@ App.PageView = Backbone.View.extend({
             window.clearTimeout(window.timeoutId);
             window.timeoutId = null;
         }
-        else {
-            var target = $(e.target);
-            target.parent().removeClass('red-tab');
-        }
+        else            
+            $(e.target).parent().removeClass('red-tab');
     },
     
     editTabName: function() {
