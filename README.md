@@ -13,10 +13,12 @@
 - Bootstrap 3.3.5
 - jQuery 2.1.4
 - jQuery UI 1.11.4
+- jQuery Cookie 1.4.1
 - Backbone.js 1.2.3
 - Handlebars.js 4.0.3
 - Backbone-MongoDB.js
 - BackboneLocalStorage.js 1.1.16
+- The Google+ platform.js
 - MongoDB (mongolabs)
 
 
